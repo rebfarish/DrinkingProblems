@@ -8,4 +8,8 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name = "QuestionText" parent="AppTheme">
+    <item name = "android:textSize">32sp</item>
+  </style>
+
 </resources>

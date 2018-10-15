@@ -1,3 +1,8 @@
 <resources>
   <string name="app_name">Drinking Problems</string>
+  <string name="question_test">This is a test question.</string>
+  <string name="option_a_button">Option A</string>
+  <string name="option_b_button">Option B</string>
+  <string name="option_c_button">Option C</string>
+
 </resources>

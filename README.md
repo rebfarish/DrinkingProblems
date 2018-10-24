@@ -1,11 +1,11 @@
-#Drinking Problems
+# Drinking Problems
 
 
 * What's the basic functionality of the app?
 
   The app will ask you multiple choice difficult math questions to unlock the user's phone. If the user answers incorrectly OR doesn't answer within a given amount of time the questions will get more difficult.
   
-  [ERD](ERD.pdf)
+  [ERD](DrinkingProbsERD.PNG)
 
 * Construct at least 2 wireframe diagrams for your app; include them in your repository in PDF form.
 

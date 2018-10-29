@@ -1,8 +1,20 @@
 <resources>
   <string name="app_name">Drinking Problems</string>
-  <string name="question_test">This is a test question.</string>
+  <string name="question_test">The answer to this question is A.</string>
+  <string name="question_test1">The answer to this question is B.</string>
+  <string name="question_test2">The answer to this question is C.</string>
   <string name="option_a_button">Option A</string>
   <string name="option_b_button">Option B</string>
   <string name="option_c_button">Option C</string>
+  <string name="cab_button">CALL A CAB</string>
+  <string name="emergency_button">EMERGENCY</string>
+  <string name="general_settings">General</string>
+  <string name="uber">Uber</string>
+  <string name="lyft">Lyft</string>
+  <string name="geo_taxi">Geo Located Taxi</string>
+  <string name="help">Help</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

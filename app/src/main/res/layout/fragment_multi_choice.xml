@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="@dimen/layout_padding"
+  tools:context=".MainActivity">
+
+
+  <RadioGroup
+    android:id="@+id/radio_group"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toBottomOf="@id/top_guideline"
+    app:layout_constraintBottom_toTopOf="@id/guideline">
+
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <RadioButton
+        android:id="@+id/option_a_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onRadioButtonClicked"
+        android:background="@drawable/button_shape"
+        android:text="@string/option_a_button"/>
+
+      <RadioButton
+        android:id="@+id/option_b_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onRadioButtonClicked"
+        android:background="@drawable/button_shape"
+        android:layout_below="@+id/option_a_button"
+        android:text="@string/option_b_button"
+        />
+
+      <RadioButton
+        android:id="@+id/option_c_button"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onRadioButtonClicked"
+        android:background="@drawable/button_shape"
+        android:text="@string/option_c_button"/>
+
+    </RelativeLayout>
+  </RadioGroup>
+
+  <TextView
+    android:id="@+id/question_text_view"
+    style="@style/QuestionText"
+    android:layout_width="wrap_content"
+    android:layout_height="118dp"
+    android:text="@string/question_test"
+    android:textAlignment="center"
+    app:layout_constraintBottom_toTopOf="@id/top_guideline"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+
+  <TextView
+    android:id="@+id/cab_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/layout_padding"
+    android:clickable="true"
+    android:focusable="true"
+    android:textSize="16sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:text="@string/cab_button"/>
+
+  <TextView
+    android:id="@+id/emergency_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:text="@string/emergency_button"
+    android:padding="@dimen/layout_padding"
+    android:textSize="16sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+  <android.support.constraint.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_begin="0dp"
+    app:layout_constraintGuide_percent=".8"/>
+
+
+  <android.support.constraint.Guideline
+    android:id="@+id/top_guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_begin="124dp"
+    app:layout_constraintGuide_percent=".25"/>
+
+
+</android.support.constraint.ConstraintLayout>

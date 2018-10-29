@@ -1,6 +1,5 @@
-package com.enenby.drinkingproblems;
+package com.enenby.drinkingproblems.controller;
 
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.enenby.drinkingproblems.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,13 +21,6 @@ public class MainActivity extends AppCompatActivity {
   private int correct;
   private View view;
   private Toolbar topToolbar;
-
-  //TODO fix question bank reference geo quiz
-//  private Question[] mQuestionBank = new Question[]{
-//      new Question(R.string.question_test),
-//      new Question(R.string.question_test1),
-//      new Question(R.string.question_test2),
-//  };
 
   //starting the question bank at question 0
   private int CurrentIndex = 0;
@@ -68,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
     topToolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
-
-
 
     FragmentManager fm = getSupportFragmentManager();
     Fragment fragmentOptions = fm.findFragmentById(R.id.fragment_container_options);

@@ -45,6 +45,8 @@ public class OptionsMenu extends Fragment {
    help = (TextView) v.findViewById(R.id.help);
    emergency = (TextView) v.findViewById(R.id.emergency_button);
 
+
+   //TODO wire up the buttons
   return v;
   }
 }

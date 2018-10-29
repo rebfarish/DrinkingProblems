@@ -15,6 +15,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
+    android:paddingTop="24dp"
     android:text="@string/general_settings"/>
 
     <TextView

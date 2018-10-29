@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.enenby.drinkingproblems.MultiChoiceFragment;
+import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
 
 
@@ -21,27 +23,31 @@ public class MainActivity extends AppCompatActivity {
   private int correct;
   private View view;
   private Toolbar topToolbar;
+  private int subscreensOnTheStack = 0;
 
   //starting the question bank at question 0
   private int CurrentIndex = 0;
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     //Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.menu, menu);
+
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-// as you specify a parent activity in AndroidManifest.xml.
+
     int id = item.getItemId();
 
     if (id == R.id.more_vert){
-      Toast.makeText(MainActivity.this, "More Options clicked", Toast.LENGTH_LONG).show();
-      return true;
+      FragmentManager fm = getSupportFragmentManager();
+      Fragment fragmentOptions = new OptionsMenu();
+
+        fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
+
     }else if (id == R.id.arrow_back){
       Toast.makeText(MainActivity.this, "Back Arrow clicked", Toast.LENGTH_LONG).show();
     }
@@ -58,13 +64,12 @@ public class MainActivity extends AppCompatActivity {
     topToolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
 
-    FragmentManager fm = getSupportFragmentManager();
-    Fragment fragmentOptions = fm.findFragmentById(R.id.fragment_container_options);
+        FragmentManager fm = getSupportFragmentManager();
+    Fragment fragmentOptions = new MultiChoiceFragment();
 
-    if (fragmentOptions == null){
-      fragmentOptions = new Fragment();
-      fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
-    }
+    fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
+
+
 
 //TODO add timer to run in background
   }

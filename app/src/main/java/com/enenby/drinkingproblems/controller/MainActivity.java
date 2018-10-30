@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
   private int correct;
   private View view;
   private Toolbar topToolbar;
-  private int subscreensOnTheStack = 0;
+  private TextView fragmentTitle;
 
   //starting the question bank at question 0
   private int CurrentIndex = 0;
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
+    boolean handled = true;
+    Fragment fragment = null;
 
     int id = item.getItemId();
 
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     topToolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
+
 
         FragmentManager fm = getSupportFragmentManager();
     Fragment fragmentOptions = new MultiChoiceFragment();

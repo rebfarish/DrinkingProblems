@@ -13,8 +13,7 @@
   <string name="lyft">Lyft</string>
   <string name="geo_taxi">Geo Located Taxi</string>
   <string name="help">Help</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="false_button">False</string>
+  <string name="true_button">True</string>
 
 </resources>

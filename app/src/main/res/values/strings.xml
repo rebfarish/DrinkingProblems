@@ -15,5 +15,9 @@
   <string name="help">Help</string>
   <string name="false_button">False</string>
   <string name="true_button">True</string>
+  <string name="sample_answer_a">sample answer a</string>
+  <string name="sample_answer_b">sample answer b</string>
+  <string name="sample_answer_c">sample answer c</string>
+  <string name="none">none of the above</string>
 
 </resources>

@@ -20,10 +20,10 @@ public class TrueFalseFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    View view = inflater.inflate(R.layout.fragment_true_false, container, false);
-    RadioButton trueButton = view.findViewById(R.id.true_button);
-    RadioButton falseButton = view.findViewById(R.id.false_button);
-    return view;
+    View v = inflater.inflate(R.layout.fragment_true_false, container, false);
+    RadioButton trueButton = v.findViewById(R.id.true_button);
+    RadioButton falseButton = v.findViewById(R.id.false_button);
+    return v;
   }
 
 }

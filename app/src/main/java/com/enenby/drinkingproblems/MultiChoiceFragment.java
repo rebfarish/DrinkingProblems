@@ -27,7 +27,7 @@ public class MultiChoiceFragment extends Fragment {
   private TextView emergencyButton;
   private TextView questionTextView;
   private int correct;
-  private View view;
+  private View v;
   private Toolbar topToolbar;
 
   //TODO fix question bank reference geo quiz

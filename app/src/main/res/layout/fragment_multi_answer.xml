@@ -8,49 +8,78 @@
   android:padding="@dimen/layout_padding"
   tools:context=".controller.MainActivity">
 
-
-  <CheckBox
-    android:id="@+id/checkbox_a"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/sample_answer_a"
-    app:layout_constraintTop_toBottomOf="@id/question_text_view"
-    app:layout_constraintBottom_toTopOf="@id/checkbox_b"/>
-
-  <CheckBox
-    android:id="@+id/checkbox_b"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/sample_answer_b"
-    app:layout_constraintTop_toBottomOf="@id/checkbox_a"
-    app:layout_constraintBottom_toTopOf="@id/checkbox_c"/>
-
-  <CheckBox
-    android:id="@+id/checkbox_c"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/sample_answer_c"
-    app:layout_constraintTop_toBottomOf="@id/checkbox_b"
-    app:layout_constraintBottom_toTopOf="@id/checkbox_d"/>
-
-  <CheckBox
-    android:id="@+id/checkbox_d"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/none"
-    app:layout_constraintTop_toBottomOf="@id/checkbox_c"
-    app:layout_constraintBottom_toTopOf="@id/guideline"/>
+  <android.support.v7.widget.CardView
+    android:id="@+id/ma_question_card"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/checkbox_card"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:elevation="10dp">
 
   <TextView
-    android:id="@+id/question_text_view"
+    android:id="@+id/question_text"
     style="@style/QuestionText"
     android:layout_width="wrap_content"
-    android:layout_height="118dp"
+    android:layout_height="wrap_content"
     android:text="@string/question_test"
-    android:textAlignment="center"
-    app:layout_constraintBottom_toTopOf="@id/top_guideline"
+    android:textAlignment="center"/>
+
+  </android.support.v7.widget.CardView>
+
+
+  <android.support.v7.widget.CardView
+    android:id="@+id/checkbox_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
+    app:layout_constraintTop_toBottomOf="@+id/ma_question_card"
+    app:layout_constraintBottom_toTopOf="@+id/cab_button">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <CheckBox
+        android:id="@+id/checkbox_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_answer_a"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_answer_b"
+        android:layout_below="@+id/checkbox_a"
+        android:layout_margin="8dp"
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_answer_c"
+        android:layout_below="@+id/checkbox_b"
+        android:layout_margin="8dp"
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/none"
+        android:layout_below="@id/checkbox_c"
+        android:layout_margin="8dp"
+        />
+    </RelativeLayout>
+
+  </android.support.v7.widget.CardView>
 
 
   <TextView
@@ -77,23 +106,6 @@
     android:textSize="16sp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintRight_toRightOf="parent"/>
-
-  <android.support.constraint.Guideline
-    android:id="@+id/guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_begin="0dp"
-    app:layout_constraintGuide_percent=".8"/>
-
-
-  <android.support.constraint.Guideline
-    android:id="@+id/top_guideline"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    app:layout_constraintGuide_begin="124dp"
-    app:layout_constraintGuide_percent=".25"/>
 
 
 </android.support.constraint.ConstraintLayout>

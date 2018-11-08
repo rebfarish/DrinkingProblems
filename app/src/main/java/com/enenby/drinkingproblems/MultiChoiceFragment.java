@@ -50,9 +50,7 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
             Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
           }
         }
-
           break;
-
       case R.id.option_b_button:
         if(checked){
         if(questionAndAnswers.getAnswers().get(1).isCorrect()){
@@ -62,7 +60,6 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
         }
       }
           break;
-
       case R.id.option_c_button:
         if(checked){
         if(questionAndAnswers.getAnswers().get(2).isCorrect()){

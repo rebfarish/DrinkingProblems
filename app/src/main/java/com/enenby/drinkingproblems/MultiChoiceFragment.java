@@ -26,7 +26,6 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
   private TextView questionTextView;
   private int correct;
   private View v;
-  private Toolbar topToolbar;
   private QuestionAndAnswers questionAndAnswers;
 
 

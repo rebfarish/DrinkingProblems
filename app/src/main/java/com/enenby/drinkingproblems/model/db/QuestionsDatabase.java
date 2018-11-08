@@ -152,11 +152,31 @@ public synchronized static void forgetInstance(Context context){
         Question question = new Question();
         Answer answer1 = new Answer();
         Answer answer2 = new Answer();
-        Answer answer3 = new Answer();
-        Answer answer4 = new Answer();
 
         question.setText("Question 1");
         question.setType(Question.TRUE_FALSE);
+        question.setRandomAnswer(true);
+        long questionId = qDao.insert(question);
+
+        answer1.setQuestionId(questionId);
+        answer1.setText("correct answer");
+        answer1.setCorrect(true);
+
+        answer2.setQuestionId(questionId);
+        answer2.setText("wrong answer");
+        answer2.setCorrect(false);
+
+      }
+
+      {
+        Question question = new Question();
+        Answer answer1 = new Answer();
+        Answer answer2 = new Answer();
+        Answer answer3 = new Answer();
+        Answer answer4 = new Answer();
+
+        question.setText("Question 2");
+        question.setType(Question.MULTI_ANS);
         question.setRandomAnswer(false);
         long questionId = qDao.insert(question);
 
@@ -175,26 +195,6 @@ public synchronized static void forgetInstance(Context context){
         answer4.setQuestionId(questionId);
         answer4.setText("wrong answer");
         answer4.setCorrect(false);
-
-      }
-
-      {
-        Question question = new Question();
-        Answer answer1 = new Answer();
-        Answer answer2 = new Answer();
-
-        question.setText("Question 2");
-        question.setType(Question.MULTI_ANS);
-        question.setRandomAnswer(true);
-        long questionId = qDao.insert(question);
-
-        answer1.setQuestionId(questionId);
-        answer1.setText("correct answer");
-        answer1.setCorrect(true);
-
-        answer2.setQuestionId(questionId);
-        answer2.setText("wrong answer");
-        answer2.setCorrect(false);
 
       }
       forgetInstance(context);

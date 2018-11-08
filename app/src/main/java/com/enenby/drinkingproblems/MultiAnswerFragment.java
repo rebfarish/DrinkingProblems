@@ -93,6 +93,7 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
     checkboxD = (CheckBox) v.findViewById(R.id.checkbox_d);
     cabButton = (TextView) v.findViewById(R.id.cab_button);
     emergencyButton = (TextView) v.findViewById(R.id.emergency_button);
+    questionTextView = v.findViewById(R.id.question_text);
     checkboxA.setOnClickListener(this);
     checkboxB.setOnClickListener(this);
     checkboxC.setOnClickListener(this);

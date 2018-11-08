@@ -1,5 +1,8 @@
 package com.enenby.drinkingproblems.controller;
 
+import static com.enenby.drinkingproblems.model.entity.Question.MULTI_CHOICE;
+
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,17 +20,23 @@ import com.enenby.drinkingproblems.MultiChoiceFragment;
 import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.TrueFalseFragment;
+import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
+import com.enenby.drinkingproblems.model.entity.Question;
+import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
-  private TextView questionTextView;
+  public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
+  private static final String QUESTION_ID = "QuestionId";
+  private TextView questionText;
   private int correct;
-
   private Toolbar topToolbar;
   private OnClickListener listener;
   private Button fragOneButton, fragTwoButton, fragThreeButton;
+  private QuestionsDatabase database;
 
 
   //starting the question bank at question 0
@@ -69,42 +78,62 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
 
-   fragOneButton = (Button) findViewById(R.id.fragment_one);
-    fragTwoButton = (Button) findViewById(R.id.fragment_two);
-    fragThreeButton = (Button) findViewById(R.id.fragment_three);
-
     topToolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
 
-
-
-    listener = new OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Fragment fragment = null;
-        int id= view.getId();
-        switch (id) {
-          case R.id.fragment_one:
-            fragment = new MultiChoiceFragment();
-            break;
-          case R.id.fragment_two:
-            fragment = new TrueFalseFragment();
-            break;
-          case R.id.fragment_three:
-            fragment = new MultiAnswerFragment();
-        }
-        if (fragment != null) {
-          getSupportFragmentManager().beginTransaction()
-              .replace(R.id.fragment_container_options, fragment)
-              .commit();
-        }
-      }
-    };
-
-    fragOneButton.setOnClickListener(listener);
-    fragTwoButton.setOnClickListener(listener);
-    fragThreeButton.setOnClickListener(listener);
+    new QueryTask().execute();
   }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    database = QuestionsDatabase.getInstance(this);
+    new QueryTask().execute();
+  }
+
+  @Override
+  protected void onStop() {
+    database = null;
+    QuestionsDatabase.forgetInstance(this);
+    super.onStop();
+  }
+
+  private class QueryTask extends AsyncTask<Void, Void, Question>{
+
+    @Override
+    protected void onPostExecute(Question question) {
+      super.onPostExecute(question);
+      Fragment fragment = null;
+      switch (question.getType()) {
+        case Question.MULTI_CHOICE:
+          fragment = new MultiChoiceFragment();
+          break;
+        case Question.TRUE_FALSE:
+          fragment = new TrueFalseFragment();
+          break;
+        case Question.MULTI_ANS:
+          fragment = new MultiAnswerFragment();
+      }
+      if (fragment != null) {
+        //figure this out how bundles work
+        Bundle bundle = new Bundle();
+        bundle.putLong(QUESTION_ID, question.getId());
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+            .replace(R.id.fragment_container_options, fragment)
+            .commit();
+      }
+    }
+
+
+    @Override
+    protected Question doInBackground(Void... voids) {
+      database = QuestionsDatabase.getInstance(MainActivity.this);
+      return database.getQuestionDao().selectRandomWithAnswers();
+    }
+  }
+
+
 }
 
 

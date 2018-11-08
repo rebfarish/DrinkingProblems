@@ -17,23 +17,6 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     android:elevation="4dp"/>
 
-  <Button
-    android:id="@+id/fragment_one"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="fragment one"/>
-
-  <Button
-    android:id="@+id/fragment_two"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="fragment two"/>
-
-  <Button
-    android:id="@+id/fragment_three"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="fragment three"/>
 
   <FrameLayout
     android:id="@+id/fragment_container_options"

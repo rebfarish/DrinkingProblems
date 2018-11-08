@@ -11,7 +11,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 
-public class MultiAnswerFragment extends Fragment {
+public class MultiAnswerFragment extends Fragment implements CheckBox.OnCheckedChangeListener{
 
 
   private CheckBox checkboxA;
@@ -22,8 +22,6 @@ public class MultiAnswerFragment extends Fragment {
   private TextView emergencyButton;
   private TextView questionTextView;
 
-
-//  private OnFragmentInteractionListener mListener;
 
   public MultiAnswerFragment() {
     // Required empty public constructor
@@ -45,31 +43,12 @@ public class MultiAnswerFragment extends Fragment {
     checkboxD = (CheckBox) v.findViewById(R.id.checkbox_d);
     cabButton = (TextView) v.findViewById(R.id.cab_button);
     emergencyButton = (TextView) v.findViewById(R.id.emergency_button);
+    checkboxA.setOnCheckedChangeListener(this);
+    checkboxB.setOnCheckedChangeListener(this);
+    checkboxC.setOnCheckedChangeListener(this);
+    checkboxD.setOnCheckedChangeListener(this);
 
     return v;
   }
 
-//  // TODO: Rename method, update argument and hook method into UI event
-//  public void onButtonPressed(Uri uri) {
-//    if (mListener != null) {
-//      mListener.onFragmentInteraction(uri);
-//    }
-//  }
-//
-//
-//  }
-//
-//  /**
-//   * This interface must be implemented by activities that contain this fragment to allow an
-//   * interaction in this fragment to be communicated to the activity and potentially other fragments
-//   * contained in that activity.
-//   * <p>
-//   * See the Android Training lesson <a href= "http://developer.android.com/training/basics/fragments/communicating.html"
-//   * >Communicating with Other Fragments</a> for more information.
-//   */
-//  public interface OnFragmentInteractionListener {
-//
-//    // TODO: Update argument type and name
-//    void onFragmentInteraction(Uri uri);
-//  }
 }

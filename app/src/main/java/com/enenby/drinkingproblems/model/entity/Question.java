@@ -9,6 +9,10 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class Question {
 
+  public static final int MULTI_CHOICE = 0;
+  public static final int MULTI_ANS = 1;
+  public static final int TRUE_FALSE = 2;
+
 @ColumnInfo(name = "question_id")
 @PrimaryKey(autoGenerate = true)
 private long id;
@@ -17,8 +21,7 @@ private String text;
 
 private boolean randomAnswer;
 
-private Enum type;
-//TODO make converter for Enum type
+private int type;
 
 public Question() {
 
@@ -48,11 +51,11 @@ public Question() {
     this.randomAnswer = randomAnswer;
   }
 
-  public Enum getType() {
+  public int getType() {
     return type;
   }
 
-  public void setType(Enum type) {
+  public void setType(int type) {
     this.type = type;
   }
 }

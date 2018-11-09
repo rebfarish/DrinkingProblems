@@ -2,8 +2,6 @@ package com.enenby.drinkingproblems.model.pojo;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Relation;
-import android.os.Parcel;
-import android.os.Parcelable;
 import com.enenby.drinkingproblems.model.entity.Answer;
 import com.enenby.drinkingproblems.model.entity.Question;
 import java.util.List;

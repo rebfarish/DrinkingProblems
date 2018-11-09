@@ -24,7 +24,6 @@
       style="@style/QuestionText"
       android:layout_width="wrap_content"
       android:layout_height="118dp"
-      android:text="@string/question_test"
       android:textAlignment="center"
       />
   </android.support.v7.widget.CardView>
@@ -48,7 +47,6 @@
       android:layout_height="wrap_content"
       android:padding="32dp"
       android:background="@drawable/button_shape"
-      android:text="@string/true_button"
       android:layout_alignParentStart="true"
       android:layout_centerVertical="true"
       android:layout_marginStart="@dimen/layout_padding"
@@ -62,7 +60,6 @@
       android:layout_height="wrap_content"
       android:padding="32dp"
       android:background="@drawable/button_shape"
-      android:text="@string/false_button"
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:layout_marginEnd="@dimen/layout_padding"

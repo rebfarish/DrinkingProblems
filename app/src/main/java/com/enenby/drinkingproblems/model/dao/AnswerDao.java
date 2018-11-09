@@ -11,7 +11,7 @@ import java.util.List;
 public interface AnswerDao {
 
   @Insert (onConflict = OnConflictStrategy.FAIL)
-  List<Long> insert(List<Answer> answers);
+  List<Long> insert(Answer... answers);
 
   @Query("SELECT * FROM Answer WHERE question_id = :questionId ORDER BY answer_id")
   List<Answer> select(long questionId);

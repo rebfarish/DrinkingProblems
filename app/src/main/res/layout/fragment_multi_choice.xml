@@ -23,7 +23,6 @@
     style="@style/QuestionText"
     android:layout_width="wrap_content"
     android:layout_height="118dp"
-    android:text="@string/question_test"
     android:textAlignment="center"/>
 
   </android.support.v7.widget.CardView>
@@ -54,8 +53,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:onClick="onRadioButtonClicked"
-        android:background="@drawable/button_shape"
-        android:text="@string/option_a_button"/>
+        android:background="@drawable/button_shape"/>
 
       <RadioButton
         android:id="@+id/option_b_button"
@@ -70,9 +68,7 @@
         android:layout_alignParentEnd="true"
         android:onClick="onRadioButtonClicked"
         android:background="@drawable/button_shape"
-        android:layout_below="@+id/option_a_button"
-        android:text="@string/option_b_button"
-        />
+        android:layout_below="@+id/option_a_button"/>
 
       <RadioButton
         android:id="@+id/option_c_button"
@@ -86,8 +82,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/option_b_button"
         android:onClick="onRadioButtonClicked"
-        android:background="@drawable/button_shape"
-        android:text="@string/option_c_button"/>
+        android:background="@drawable/button_shape"/>
 
     </RelativeLayout>
 

@@ -46,7 +46,6 @@
         android:id="@+id/checkbox_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_answer_a"
         android:layout_alignParentTop="true"
         android:layout_margin="8dp"
         />
@@ -55,7 +54,6 @@
         android:id="@+id/checkbox_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_answer_b"
         android:layout_below="@+id/checkbox_a"
         android:layout_margin="8dp"
         />
@@ -64,7 +62,6 @@
         android:id="@+id/checkbox_c"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sample_answer_c"
         android:layout_below="@+id/checkbox_b"
         android:layout_margin="8dp"
         />
@@ -73,7 +70,6 @@
         android:id="@+id/checkbox_d"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/none"
         android:layout_below="@id/checkbox_c"
         android:layout_margin="8dp"
         />

@@ -30,17 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
 
   public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
-  private static final String QUESTION_ID = "QuestionId";
+  public static final String QUESTION_ID = "QuestionId";
   private TextView questionText;
   private int correct;
   private Toolbar topToolbar;
   private OnClickListener listener;
-  private Button fragOneButton, fragTwoButton, fragThreeButton;
   private QuestionsDatabase database;
-
-
-  //starting the question bank at question 0
-  private int CurrentIndex = 0;
 
 
   @Override
@@ -136,10 +131,4 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-
-
-
-
-
-    //TODO add cycle through questions
 //TODO add timer to run in background

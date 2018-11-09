@@ -1,5 +1,7 @@
 package com.enenby.drinkingproblems;
 
+import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
@@ -99,6 +100,9 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
     checkboxC.setOnClickListener(this);
     checkboxD.setOnClickListener(this);
 
+    Bundle bundle = getArguments();
+
+    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
     return v;
   }
 

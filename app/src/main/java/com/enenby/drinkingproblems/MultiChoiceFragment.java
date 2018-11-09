@@ -1,5 +1,7 @@
 package com.enenby.drinkingproblems;
 
+import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -86,6 +88,9 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     optionBButton.setOnClickListener(this);
     optionCButton.setOnClickListener(this);
 
+    Bundle bundle = getArguments();
+
+    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
     return v;
   }
 

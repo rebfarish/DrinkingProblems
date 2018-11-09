@@ -1,6 +1,8 @@
 package com.enenby.drinkingproblems;
 
 
+import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -76,6 +78,9 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
     questionTextView = v.findViewById(R.id.question_text);
     trueButton.setOnClickListener(this);
     falseButton.setOnClickListener(this);
+
+    Bundle bundle = getArguments();
+    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
 
     return v;
   }

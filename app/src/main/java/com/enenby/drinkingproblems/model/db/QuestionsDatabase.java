@@ -82,7 +82,7 @@ public synchronized static void forgetInstance(Context context){
         Answer answer2 = new Answer();
         Answer answer3 = new Answer();
 
-        question.setText("Q2");
+        question.setText("question 0_a");
         question.setType(Question.MULTI_CHOICE);
         question.setRandomAnswer(true);
         long questionId = qDao.insert(question);
@@ -90,6 +90,7 @@ public synchronized static void forgetInstance(Context context){
         answer1.setQuestionId(questionId);
         answer1.setText("correct answer");
         answer1.setCorrect(true);
+
 
         answer2.setQuestionId(questionId);
         answer2.setText("wrong answer");
@@ -99,6 +100,7 @@ public synchronized static void forgetInstance(Context context){
         answer3.setText("wrong answer");
         answer3.setCorrect(false);
 
+        aDao.insert(answer1, answer2, answer3);
       }
 
       {
@@ -123,6 +125,8 @@ public synchronized static void forgetInstance(Context context){
         answer3.setQuestionId(questionId);
         answer3.setText("wrong answer");
         answer3.setCorrect(false);
+
+        aDao.insert(answer1, answer2, answer3);
       }
       {
         Question question = new Question();
@@ -146,6 +150,8 @@ public synchronized static void forgetInstance(Context context){
         answer3.setQuestionId(questionId);
         answer3.setText("wrong answer");
         answer3.setCorrect(false);
+
+        aDao.insert(answer1, answer2, answer3);
       }
 
       {
@@ -166,6 +172,7 @@ public synchronized static void forgetInstance(Context context){
         answer2.setText("wrong answer");
         answer2.setCorrect(false);
 
+        aDao.insert(answer1, answer2);
       }
 
       {
@@ -195,6 +202,8 @@ public synchronized static void forgetInstance(Context context){
         answer4.setQuestionId(questionId);
         answer4.setText("wrong answer");
         answer4.setCorrect(false);
+
+        aDao.insert(answer1, answer2, answer3, answer4);
 
       }
       forgetInstance(context);

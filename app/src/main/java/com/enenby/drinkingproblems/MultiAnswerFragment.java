@@ -2,6 +2,8 @@ package com.enenby.drinkingproblems;
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +28,8 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
   private TextView emergencyButton;
   private TextView questionTextView;
   private QuestionAndAnswers questionAndAnswers;
+  private DevicePolicyManager devicePolicyManager;
+  private ComponentName compName;
 
 
   public MultiAnswerFragment() {
@@ -47,8 +51,13 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
           if (checked){
             if(questionAndAnswers.getAnswers().get(0).isCorrect()){
               Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            }else {
-              Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+            } else {
+              boolean active = devicePolicyManager.isAdminActive(compName);
+
+              if (active) {
+                devicePolicyManager.lockNow();
+
+              }
             }
           }
           break;
@@ -56,8 +65,13 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
           if(checked){
             if(questionAndAnswers.getAnswers().get(1).isCorrect()){
               Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            }else {
-              Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+            } else {
+              boolean active = devicePolicyManager.isAdminActive(compName);
+
+              if (active) {
+                devicePolicyManager.lockNow();
+
+              }
             }
           }
           break;
@@ -65,8 +79,13 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
           if(checked){
             if(questionAndAnswers.getAnswers().get(2).isCorrect()){
               Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            }else {
-              Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+            } else {
+              boolean active = devicePolicyManager.isAdminActive(compName);
+
+              if (active) {
+                devicePolicyManager.lockNow();
+
+              }
             }
           }
           break;
@@ -74,8 +93,13 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
           if(checked){
             if(questionAndAnswers.getAnswers().get(3).isCorrect()){
               Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            }else {
-              Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+            } else {
+              boolean active = devicePolicyManager.isAdminActive(compName);
+
+              if (active) {
+                devicePolicyManager.lockNow();
+
+              }
             }
           }
           break;
@@ -99,6 +123,7 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
     checkboxB.setOnClickListener(this);
     checkboxC.setOnClickListener(this);
     checkboxD.setOnClickListener(this);
+
 
     Bundle bundle = getArguments();
 

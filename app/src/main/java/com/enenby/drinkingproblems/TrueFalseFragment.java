@@ -3,6 +3,8 @@ package com.enenby.drinkingproblems;
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +29,8 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
   private int correct;
   private View v;
   private QuestionAndAnswers questionAndAnswers;
+  private DevicePolicyManager devicePolicyManager;
+  private ComponentName compName;
 
 
   public TrueFalseFragment() {
@@ -50,7 +54,11 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
           if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
-            Toast.makeText(getActivity(), "Incorrect", Toast.LENGTH_LONG).show();
+            boolean active = devicePolicyManager.isAdminActive(compName);
+
+            if (active) {
+              devicePolicyManager.lockNow();
+            }
           }
         }
         break;
@@ -59,7 +67,11 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
           if (questionAndAnswers.getAnswers().get(1).isCorrect()) {
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
-            Toast.makeText(getActivity(), "Incorrect", Toast.LENGTH_LONG).show();
+            boolean active = devicePolicyManager.isAdminActive(compName);
+
+            if (active) {
+              devicePolicyManager.lockNow();
+            }
           }
         }
         break;
@@ -84,6 +96,7 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
 
     return v;
   }
+
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 
     @Override

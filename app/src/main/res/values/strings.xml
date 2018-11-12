@@ -1,11 +1,5 @@
 <resources>
   <string name="app_name">Drinking Problems</string>
-  <string name="question_test">The answer to this question is A.</string>
-  <string name="question_test1">The answer to this question is B.</string>
-  <string name="question_test2">The answer to this question is C.</string>
-  <string name="option_a_button">Option A</string>
-  <string name="option_b_button">Option B</string>
-  <string name="option_c_button">Option C</string>
   <string name="cab_button">CALL A CAB</string>
   <string name="emergency_button">EMERGENCY</string>
   <string name="general_settings">General</string>
@@ -13,11 +7,5 @@
   <string name="lyft">Lyft</string>
   <string name="geo_taxi">Geo Located Taxi</string>
   <string name="help">Help</string>
-  <string name="false_button">False</string>
-  <string name="true_button">True</string>
-  <string name="sample_answer_a">sample answer a</string>
-  <string name="sample_answer_b">sample answer b</string>
-  <string name="sample_answer_c">sample answer c</string>
-  <string name="none">none of the above</string>
 
 </resources>

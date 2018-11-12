@@ -2,6 +2,10 @@ package com.enenby.drinkingproblems.controller;
 
 import static com.enenby.drinkingproblems.model.entity.Question.MULTI_CHOICE;
 
+import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +23,7 @@ import com.enenby.drinkingproblems.MultiAnswerFragment;
 import com.enenby.drinkingproblems.MultiChoiceFragment;
 import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
+import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.TrueFalseFragment;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.entity.Question;
@@ -36,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
   private Toolbar topToolbar;
   private OnClickListener listener;
   private QuestionsDatabase database;
-
+  private DevicePolicyManager devicePolicyManager;
+  private ComponentName compName;
+  public static final int RESULT_ENABLE = 11;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,9 +79,16 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-
+    devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(this, ScreenLock.class);
     topToolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
+
+    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
+    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+        "App needs permission to lock screen");
+    startActivityForResult(intent, RESULT_ENABLE);
 
     new QueryTask().execute();
   }
@@ -128,7 +142,23 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch(requestCode){
+      case RESULT_ENABLE:
+        if (resultCode == Activity.RESULT_OK){
+          Toast.makeText(MainActivity.this,
+              "You have enabled the Admin Device Features",
+              Toast.LENGTH_LONG).show();
+        }else {
+          Toast.makeText(MainActivity.this,
+              "Cannot enable Admin Device Features",
+              Toast.LENGTH_LONG).show();
+        }
+        break;
+    }
+    super.onActivityResult(requestCode, resultCode, data);
+  }
 }
 
 //TODO add timer to run in background

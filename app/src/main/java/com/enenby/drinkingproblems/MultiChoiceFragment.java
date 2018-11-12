@@ -1,7 +1,13 @@
 package com.enenby.drinkingproblems;
 
+import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
+import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.bluetooth.BluetoothClass.Device;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.enenby.drinkingproblems.controller.MainActivity;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import java.util.Collections;
@@ -29,6 +36,9 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
   private int correct;
   private View v;
   private QuestionAndAnswers questionAndAnswers;
+  public static final int RESULT_ENABLE = 11;
+  private DevicePolicyManager devicePolicyManager;
+  private ComponentName compName;
 
 
   @Override
@@ -44,32 +54,47 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     // Check which radio button was clicked
     switch (view.getId()) {
       case R.id.option_a_button:
-        if (checked){
-          if(questionAndAnswers.getAnswers().get(0).isCorrect()){
-            Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-          }else {
-            Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+        if (checked) {
+          if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
+            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
+          } else {
+            boolean active = devicePolicyManager.isAdminActive(compName);
+
+            if (active) {
+              devicePolicyManager.lockNow();
+
+            }
+          }
+
+        }
+
+        break;
+      case R.id.option_b_button:
+        if (checked) {
+          if (questionAndAnswers.getAnswers().get(1).isCorrect()) {
+            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
+          } else {
+            boolean active = devicePolicyManager.isAdminActive(compName);
+
+            if (active) {
+              devicePolicyManager.lockNow();
+            }
           }
         }
-          break;
-      case R.id.option_b_button:
-        if(checked){
-        if(questionAndAnswers.getAnswers().get(1).isCorrect()){
-          Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-        }else {
-          Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
-        }
-      }
-          break;
+        break;
       case R.id.option_c_button:
-        if(checked){
-        if(questionAndAnswers.getAnswers().get(2).isCorrect()){
-          Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-        }else {
-          Toast.makeText(getActivity(),"Incorrect" ,Toast.LENGTH_LONG ).show();
+        if (checked) {
+          if (questionAndAnswers.getAnswers().get(2).isCorrect()) {
+            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
+          } else {
+            boolean active = devicePolicyManager.isAdminActive(compName);
+
+            if (active) {
+              devicePolicyManager.lockNow();
+            }
+          }
         }
-      }
-          break;
+        break;
 
     }
   }
@@ -87,6 +112,9 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     optionAButton.setOnClickListener(this);
     optionBButton.setOnClickListener(this);
     optionCButton.setOnClickListener(this);
+    devicePolicyManager = (DevicePolicyManager) getActivity()
+        .getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(getActivity(), ScreenLock.class);
 
     Bundle bundle = getArguments();
 
@@ -116,6 +144,24 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     protected QuestionAndAnswers doInBackground(Long... id) {
       return QuestionsDatabase.getInstance(getActivity()).getQuestionDao().selectById(id[0]);
     }
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+      case RESULT_ENABLE:
+        if (resultCode == Activity.RESULT_OK) {
+          Toast.makeText(getActivity(),
+              "You have enabled the Admin Device Features",
+              Toast.LENGTH_LONG).show();
+        } else {
+          Toast.makeText(getActivity(),
+              "Cannot enable Admin Device Features",
+              Toast.LENGTH_LONG).show();
+        }
+        break;
+    }
+    super.onActivityResult(requestCode, resultCode, data);
   }
 }
 

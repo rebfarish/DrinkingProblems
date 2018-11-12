@@ -52,7 +52,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:onClick="onRadioButtonClicked"
         android:background="@drawable/button_shape"/>
 
       <RadioButton
@@ -66,7 +65,6 @@
         android:layout_centerInParent="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:onClick="onRadioButtonClicked"
         android:background="@drawable/button_shape"
         android:layout_below="@+id/option_a_button"/>
 
@@ -81,7 +79,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/option_b_button"
-        android:onClick="onRadioButtonClicked"
         android:background="@drawable/button_shape"/>
 
     </RelativeLayout>

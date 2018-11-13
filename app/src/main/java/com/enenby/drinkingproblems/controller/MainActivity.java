@@ -1,22 +1,18 @@
 package com.enenby.drinkingproblems.controller;
 
-import static com.enenby.drinkingproblems.model.entity.Question.MULTI_CHOICE;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.enenby.drinkingproblems.MultiAnswerFragment;
@@ -27,8 +23,6 @@ import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.TrueFalseFragment;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.entity.Question;
-import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,11 +39,53 @@ public class MainActivity extends AppCompatActivity {
   private ComponentName compName;
   public static final int RESULT_ENABLE = 11;
 
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(this, ScreenLock.class);
+
+    topToolbar = findViewById(R.id.toolbar);
+    setSupportActionBar(topToolbar);
+
+    database = QuestionsDatabase.getInstance(this);
+    new InitializeDataBase().execute();
+
+    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
+    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+        "App needs permission to lock screen");
+    startActivityForResult(intent, RESULT_ENABLE);
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    switch (requestCode) {
+      case RESULT_ENABLE:
+        if (resultCode == Activity.RESULT_OK) {
+          Toast.makeText(MainActivity.this,
+              "You have enabled the Admin Device Features",
+              Toast.LENGTH_LONG).show();
+
+          new QueryTask().execute();
+
+        } else {
+          Toast.makeText(MainActivity.this,
+              "Cannot enable Admin Device Features",
+              Toast.LENGTH_LONG).show();
+        }
+        break;
+    }
+    super.onActivityResult(requestCode, resultCode, data);
+  }
+
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     //Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.menu, menu);
-
     return true;
   }
 
@@ -71,34 +107,8 @@ public class MainActivity extends AppCompatActivity {
     }
     //TODO make tool bar buttons navigate to where they should go, get rid of toasts
     return super.onOptionsItemSelected(item);
-
   }
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-    compName = new ComponentName(this, ScreenLock.class);
-    topToolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(topToolbar);
-
-    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-    intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
-    intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-        "App needs permission to lock screen");
-    startActivityForResult(intent, RESULT_ENABLE);
-
-    new QueryTask().execute();
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    database = QuestionsDatabase.getInstance(this);
-    new QueryTask().execute();
-  }
 
   @Override
   protected void onStop() {
@@ -107,7 +117,19 @@ public class MainActivity extends AppCompatActivity {
     super.onStop();
   }
 
-  private class QueryTask extends AsyncTask<Void, Void, Question>{
+
+  //initializes data base to fix null pointer exception on OnCreate
+  private class InitializeDataBase extends AsyncTask<Void, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+      QuestionsDatabase.getInstance(MainActivity.this).getQuestionDao().select();
+      return null;
+    }
+  }
+
+
+  private class QueryTask extends AsyncTask<Void, Void, Question> {
 
     @Override
     protected void onPostExecute(Question question) {
@@ -134,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
-
     @Override
     protected Question doInBackground(Void... voids) {
       database = QuestionsDatabase.getInstance(MainActivity.this);
@@ -142,23 +163,6 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch(requestCode){
-      case RESULT_ENABLE:
-        if (resultCode == Activity.RESULT_OK){
-          Toast.makeText(MainActivity.this,
-              "You have enabled the Admin Device Features",
-              Toast.LENGTH_LONG).show();
-        }else {
-          Toast.makeText(MainActivity.this,
-              "Cannot enable Admin Device Features",
-              Toast.LENGTH_LONG).show();
-        }
-        break;
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-  }
 }
 
 //TODO add timer to run in background

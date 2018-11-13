@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.enenby.drinkingproblems.controller.MainActivity;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
+import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
 
@@ -32,7 +33,7 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
   private RadioButton optionCButton;
   private TextView cabButton;
   private TextView emergencyButton;
-  private TextView questionTextView;
+  private MathView questionTextView;
   private int correct;
   private View v;
   private QuestionAndAnswers questionAndAnswers;
@@ -46,6 +47,28 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     super.onCreate(savedInstanceState);
   }
 
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    View v = inflater.inflate(R.layout.fragment_multi_choice, container, false);
+    optionAButton = v.findViewById(R.id.option_a_button);
+    optionBButton = v.findViewById(R.id.option_b_button);
+    optionCButton = v.findViewById(R.id.option_c_button);
+    cabButton = v.findViewById(R.id.cab_button);
+    emergencyButton = v.findViewById(R.id.emergency_button);
+    questionTextView = v.findViewById(R.id.question_text);
+    optionAButton.setOnClickListener(this);
+    optionBButton.setOnClickListener(this);
+    optionCButton.setOnClickListener(this);
+    devicePolicyManager = (DevicePolicyManager) getActivity()
+        .getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(getActivity(), ScreenLock.class);
+
+    Bundle bundle = getArguments();
+
+    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
+    return v;
+  }
 
   public void onClick(View view) {
     // Is the button now checked?
@@ -62,12 +85,9 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
 
             if (active) {
               devicePolicyManager.lockNow();
-
             }
           }
-
         }
-
         break;
       case R.id.option_b_button:
         if (checked) {
@@ -75,7 +95,6 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
             boolean active = devicePolicyManager.isAdminActive(compName);
-
             if (active) {
               devicePolicyManager.lockNow();
             }
@@ -88,39 +107,15 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
             boolean active = devicePolicyManager.isAdminActive(compName);
-
             if (active) {
               devicePolicyManager.lockNow();
             }
           }
         }
         break;
-
     }
   }
 
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    View v = inflater.inflate(R.layout.fragment_multi_choice, container, false);
-    optionAButton = (RadioButton) v.findViewById(R.id.option_a_button);
-    optionBButton = (RadioButton) v.findViewById(R.id.option_b_button);
-    optionCButton = (RadioButton) v.findViewById(R.id.option_c_button);
-    cabButton = (TextView) v.findViewById(R.id.cab_button);
-    emergencyButton = (TextView) v.findViewById(R.id.emergency_button);
-    questionTextView = v.findViewById(R.id.question_text);
-    optionAButton.setOnClickListener(this);
-    optionBButton.setOnClickListener(this);
-    optionCButton.setOnClickListener(this);
-    devicePolicyManager = (DevicePolicyManager) getActivity()
-        .getSystemService(DEVICE_POLICY_SERVICE);
-    compName = new ComponentName(getActivity(), ScreenLock.class);
-
-    Bundle bundle = getArguments();
-
-    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
-    return v;
-  }
 
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 
@@ -136,8 +131,6 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
       questionTextView.setText(questionAndAnswers.getQuestion().getText());
 
       MultiChoiceFragment.this.questionAndAnswers = questionAndAnswers;
-
-
     }
 
     @Override
@@ -146,23 +139,6 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     }
   }
 
-  @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
-    switch (requestCode) {
-      case RESULT_ENABLE:
-        if (resultCode == Activity.RESULT_OK) {
-          Toast.makeText(getActivity(),
-              "You have enabled the Admin Device Features",
-              Toast.LENGTH_LONG).show();
-        } else {
-          Toast.makeText(getActivity(),
-              "Cannot enable Admin Device Features",
-              Toast.LENGTH_LONG).show();
-        }
-        break;
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-  }
 }
 
 

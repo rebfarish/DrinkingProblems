@@ -19,12 +19,12 @@
     app:layout_constraintRight_toRightOf="parent"
     android:elevation="10dp">
 
-    <TextView
+    <io.github.kexanie.library.MathView
       android:id="@+id/question_text"
-      style="@style/QuestionText"
       android:layout_width="wrap_content"
-      android:layout_height="118dp"
+      android:layout_height="wrap_content"
       android:textAlignment="center"
+      app:engine="KaTeX"
       />
   </android.support.v7.widget.CardView>
 

@@ -18,12 +18,13 @@
     app:layout_constraintRight_toRightOf="parent"
     android:elevation="10dp">
 
-  <TextView
+  <io.github.kexanie.library.MathView
     android:id="@+id/question_text"
-    style="@style/QuestionText"
     android:layout_width="wrap_content"
-    android:layout_height="118dp"
-    android:textAlignment="center"/>
+    android:layout_height="wrap_content"
+    android:textAlignment="center"
+    app:engine="KaTeX"
+    />
 
   </android.support.v7.widget.CardView>
 
@@ -38,48 +39,50 @@
 
     <RelativeLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="match_parent"
+      >
 
-      <RadioButton
-        android:id="@+id/option_a_button"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/button_shape"/>
 
-      <RadioButton
-        android:id="@+id/option_b_button"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/button_shape"
-        android:layout_below="@+id/option_a_button"/>
+        <RadioButton
+          android:id="@+id/option_a_button"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginLeft="24dp"
+          android:layout_marginRight="24dp"
+          android:layout_centerInParent="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentEnd="true"
+          android:layout_alignParentTop="true"
+          android:background="@drawable/button_shape"/>
 
-      <RadioButton
-        android:id="@+id/option_c_button"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/option_b_button"
-        android:background="@drawable/button_shape"/>
+        <RadioButton
+          android:id="@+id/option_b_button"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginLeft="24dp"
+          android:layout_marginRight="24dp"
+          android:layout_centerInParent="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentEnd="true"
+          android:background="@drawable/button_shape"
+          android:layout_below="@+id/option_a_button"/>
+
+        <RadioButton
+          android:id="@+id/option_c_button"
+          android:layout_width="wrap_content"
+          android:layout_height="48dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginLeft="24dp"
+          android:layout_marginRight="24dp"
+          android:layout_centerInParent="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentEnd="true"
+          android:layout_below="@+id/option_b_button"
+          android:background="@drawable/button_shape"/>
 
     </RelativeLayout>
 

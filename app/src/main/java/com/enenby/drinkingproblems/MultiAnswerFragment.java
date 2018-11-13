@@ -15,10 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
+import io.github.kexanie.library.MathView;
 
 
 public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickListener{
-
 
   private CheckBox checkboxA;
   private CheckBox checkboxB;
@@ -26,15 +26,11 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
   private CheckBox checkboxD;
   private TextView cabButton;
   private TextView emergencyButton;
-  private TextView questionTextView;
+  private MathView questionTextView;
   private QuestionAndAnswers questionAndAnswers;
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
 
-
-  public MultiAnswerFragment() {
-    // Required empty public constructor
-  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +52,6 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
 
               if (active) {
                 devicePolicyManager.lockNow();
-
               }
             }
           }
@@ -70,7 +65,6 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
 
               if (active) {
                 devicePolicyManager.lockNow();
-
               }
             }
           }
@@ -84,7 +78,6 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
 
               if (active) {
                 devicePolicyManager.lockNow();
-
               }
             }
           }
@@ -104,7 +97,6 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
           }
           break;
       }
-
   }
 
   @Override
@@ -112,12 +104,12 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_multi_answer, container, false);
-    checkboxA = (CheckBox) v.findViewById(R.id.checkbox_a);
-    checkboxB = (CheckBox) v.findViewById(R.id.checkbox_b);
-    checkboxC = (CheckBox) v.findViewById(R.id.checkbox_c);
-    checkboxD = (CheckBox) v.findViewById(R.id.checkbox_d);
-    cabButton = (TextView) v.findViewById(R.id.cab_button);
-    emergencyButton = (TextView) v.findViewById(R.id.emergency_button);
+    checkboxA = v.findViewById(R.id.checkbox_a);
+    checkboxB = v.findViewById(R.id.checkbox_b);
+    checkboxC = v.findViewById(R.id.checkbox_c);
+    checkboxD = v.findViewById(R.id.checkbox_d);
+    cabButton = v.findViewById(R.id.cab_button);
+    emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
     checkboxA.setOnClickListener(this);
     checkboxB.setOnClickListener(this);

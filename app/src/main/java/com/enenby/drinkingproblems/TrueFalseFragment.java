@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
+import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
 public class TrueFalseFragment extends Fragment implements RadioButton.OnClickListener {
@@ -25,17 +26,12 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
   private RadioButton falseButton;
   private TextView cabButton;
   private TextView emergencyButton;
-  private TextView questionTextView;
+  private MathView questionTextView;
   private int correct;
   private View v;
   private QuestionAndAnswers questionAndAnswers;
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
-
-
-  public TrueFalseFragment() {
-    // Required empty public constructor
-  }
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +42,6 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
   public void onClick(View view) {
     //is the button now checked?
     boolean checked = ((RadioButton) view).isChecked();
-
     // Check which radio button was clicked
     switch (view.getId()) {
       case R.id.true_button:
@@ -55,7 +50,6 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
             boolean active = devicePolicyManager.isAdminActive(compName);
-
             if (active) {
               devicePolicyManager.lockNow();
             }
@@ -68,7 +62,6 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
             Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
           } else {
             boolean active = devicePolicyManager.isAdminActive(compName);
-
             if (active) {
               devicePolicyManager.lockNow();
             }
@@ -83,10 +76,10 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_true_false, container, false);
-    trueButton = (RadioButton) v.findViewById(R.id.true_button);
-    falseButton = (RadioButton) v.findViewById(R.id.false_button);
-    cabButton = (TextView) v.findViewById(R.id.cab_button);
-    emergencyButton = (TextView) v.findViewById(R.id.emergency_button);
+    trueButton = v.findViewById(R.id.true_button);
+    falseButton = v.findViewById(R.id.false_button);
+    cabButton = v.findViewById(R.id.cab_button);
+    emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
     trueButton.setOnClickListener(this);
     falseButton.setOnClickListener(this);

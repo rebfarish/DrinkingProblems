@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.enenby.drinkingproblems.controller.MainActivity;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
@@ -46,28 +47,24 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
     switch (view.getId()) {
       case R.id.true_button:
         if (checked) {
-          if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
-            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
-          } else {
-            boolean active = devicePolicyManager.isAdminActive(compName);
-            if (active) {
-              devicePolicyManager.lockNow();
-            }
-          }
+          checkAnswer();
         }
         break;
       case R.id.false_button:
         if (checked) {
-          if (questionAndAnswers.getAnswers().get(1).isCorrect()) {
-            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
-          } else {
-            boolean active = devicePolicyManager.isAdminActive(compName);
-            if (active) {
-              devicePolicyManager.lockNow();
-            }
-          }
+          checkAnswer();
         }
         break;
+    }
+  }
+  private void checkAnswer(){
+    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
+      getActivity().finish();
+    } else {
+      boolean active = devicePolicyManager.isAdminActive(compName);
+      if (active) {
+        devicePolicyManager.lockNow();
+      }
     }
   }
 
@@ -110,4 +107,7 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
       return QuestionsDatabase.getInstance(getActivity()).getQuestionDao().selectById(id[0]);
     }
   }
+
+
+
 }

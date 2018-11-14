@@ -78,44 +78,32 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     switch (view.getId()) {
       case R.id.option_a_button:
         if (checked) {
-          if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
-            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
-          } else {
-            boolean active = devicePolicyManager.isAdminActive(compName);
-
-            if (active) {
-              devicePolicyManager.lockNow();
-            }
-          }
+          checkAnswer();
         }
         break;
       case R.id.option_b_button:
         if (checked) {
-          if (questionAndAnswers.getAnswers().get(1).isCorrect()) {
-            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
-          } else {
-            boolean active = devicePolicyManager.isAdminActive(compName);
-            if (active) {
-              devicePolicyManager.lockNow();
-            }
-          }
+          checkAnswer();
         }
         break;
       case R.id.option_c_button:
         if (checked) {
-          if (questionAndAnswers.getAnswers().get(2).isCorrect()) {
-            Toast.makeText(getActivity(), "Correct", Toast.LENGTH_LONG).show();
-          } else {
-            boolean active = devicePolicyManager.isAdminActive(compName);
-            if (active) {
-              devicePolicyManager.lockNow();
-            }
-          }
+          checkAnswer();
         }
         break;
     }
   }
 
+  private void checkAnswer(){
+    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
+      getActivity().finish();
+    } else {
+      boolean active = devicePolicyManager.isAdminActive(compName);
+      if (active) {
+        devicePolicyManager.lockNow();
+      }
+    }
+  }
 
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 

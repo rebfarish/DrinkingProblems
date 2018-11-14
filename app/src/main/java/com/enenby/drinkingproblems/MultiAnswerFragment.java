@@ -44,59 +44,36 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
       // Check which radio button was clicked
       switch (view.getId()) {
         case R.id.checkbox_a:
-          if (checked){
-            if(questionAndAnswers.getAnswers().get(0).isCorrect()){
-              Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            } else {
-              boolean active = devicePolicyManager.isAdminActive(compName);
-
-              if (active) {
-                devicePolicyManager.lockNow();
-              }
-            }
+          if (checked) {
+            checkAnswer();
           }
           break;
         case R.id.checkbox_b:
-          if(checked){
-            if(questionAndAnswers.getAnswers().get(1).isCorrect()){
-              Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            } else {
-              boolean active = devicePolicyManager.isAdminActive(compName);
-
-              if (active) {
-                devicePolicyManager.lockNow();
-              }
-            }
+          if (checked) {
+            checkAnswer();
           }
           break;
         case R.id.checkbox_c:
-          if(checked){
-            if(questionAndAnswers.getAnswers().get(2).isCorrect()){
-              Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            } else {
-              boolean active = devicePolicyManager.isAdminActive(compName);
-
-              if (active) {
-                devicePolicyManager.lockNow();
-              }
-            }
-          }
+          if (checked) {
+          checkAnswer();
+        }
           break;
         case R.id.checkbox_d:
-          if(checked){
-            if(questionAndAnswers.getAnswers().get(3).isCorrect()){
-              Toast.makeText(getActivity(),"Correct" ,Toast.LENGTH_LONG ).show();
-            } else {
-              boolean active = devicePolicyManager.isAdminActive(compName);
-
-              if (active) {
-                devicePolicyManager.lockNow();
-
-              }
-            }
+          if (checked) {
+            checkAnswer();
           }
           break;
       }
+  }
+  private void checkAnswer(){
+    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
+      getActivity().finish();
+    } else {
+      boolean active = devicePolicyManager.isAdminActive(compName);
+      if (active) {
+        devicePolicyManager.lockNow();
+      }
+    }
   }
 
   @Override

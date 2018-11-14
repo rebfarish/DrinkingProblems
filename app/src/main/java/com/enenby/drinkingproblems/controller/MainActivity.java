@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
 
+
   private class QueryTask extends AsyncTask<Void, Void, Question> {
 
     @Override
@@ -162,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
       return database.getQuestionDao().selectRandomWithAnswers();
     }
   }
+
+
 
 }
 

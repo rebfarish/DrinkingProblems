@@ -1,4 +1,4 @@
-package com.enenby.drinkingproblems;
+package com.enenby.drinkingproblems.controller;
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
+import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 
 
-public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickListener{
+public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.OnClickListener{
 
   private CheckBox checkboxA;
   private CheckBox checkboxB;
@@ -27,9 +27,7 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
-  private QuestionAndAnswers questionAndAnswers;
-  private DevicePolicyManager devicePolicyManager;
-  private ComponentName compName;
+
 
 
   @Override
@@ -45,36 +43,27 @@ public class MultiAnswerFragment extends Fragment implements CheckBox.OnClickLis
       switch (view.getId()) {
         case R.id.checkbox_a:
           if (checked) {
-            checkAnswer();
+            checkAnswer(0);
           }
           break;
         case R.id.checkbox_b:
           if (checked) {
-            checkAnswer();
+            checkAnswer(1);
           }
           break;
         case R.id.checkbox_c:
           if (checked) {
-          checkAnswer();
+          checkAnswer(2);
         }
           break;
         case R.id.checkbox_d:
           if (checked) {
-            checkAnswer();
+            checkAnswer(3);
           }
           break;
       }
   }
-  private void checkAnswer(){
-    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
-      getActivity().finish();
-    } else {
-      boolean active = devicePolicyManager.isAdminActive(compName);
-      if (active) {
-        devicePolicyManager.lockNow();
-      }
-    }
-  }
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

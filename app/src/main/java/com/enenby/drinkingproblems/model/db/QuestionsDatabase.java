@@ -31,7 +31,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
   public synchronized static QuestionsDatabase getInstance(Context context) {
     if (instance == null) {
       instance = Room.databaseBuilder(context.getApplicationContext(), QuestionsDatabase.class,
-          DB_NAME).addCallback(new Callback(context.getApplicationContext()))
+          DB_NAME)
           .build();
     }
     return instance;
@@ -46,36 +46,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 
   public abstract QuestionDao getQuestionDao();
 
-  private static class Callback extends RoomDatabase.Callback {
-
-    private Context context;
-
-    public Callback(Context context) {
-      this.context = context;
-    }
-
-    @Override
-    public void onCreate(@NonNull SupportSQLiteDatabase db) {
-      super.onCreate(db);
-      new PrepopulateTask(context).execute();
-    }
-
-    @Override
-    public void onOpen(@NonNull SupportSQLiteDatabase db) {
-      super.onOpen(db);
-    }
-  }
-
-  private static class PrepopulateTask extends AsyncTask<Void, Void, Void> {
-
-    private Context context;
-
-    public PrepopulateTask(Context context) {
-      this.context = context;
-    }
-
-    @Override
-    protected Void doInBackground(Void... voids) {
+  public static void populateQuestions(Context context) {
       QuestionsDatabase db = getInstance(context);
       QuestionDao qDao = db.getQuestionDao();
       AnswerDao aDao = db.getAnswerDao();
@@ -209,7 +180,5 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 
       }
       forgetInstance(context);
-      return null;
     }
-  }
 }

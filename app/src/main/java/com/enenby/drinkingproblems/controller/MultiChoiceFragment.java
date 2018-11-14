@@ -1,31 +1,27 @@
-package com.enenby.drinkingproblems;
+package com.enenby.drinkingproblems.controller;
 
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import android.bluetooth.BluetoothClass.Device;
 import android.content.ComponentName;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.enenby.drinkingproblems.controller.MainActivity;
+import com.enenby.drinkingproblems.R;
+import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
 
-public class MultiChoiceFragment extends Fragment implements RadioButton.OnClickListener {
+public class MultiChoiceFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
 
   private RadioButton optionAButton;
@@ -36,10 +32,8 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
   private MathView questionTextView;
   private int correct;
   private View v;
-  private QuestionAndAnswers questionAndAnswers;
   public static final int RESULT_ENABLE = 11;
-  private DevicePolicyManager devicePolicyManager;
-  private ComponentName compName;
+
 
 
   @Override
@@ -78,32 +72,23 @@ public class MultiChoiceFragment extends Fragment implements RadioButton.OnClick
     switch (view.getId()) {
       case R.id.option_a_button:
         if (checked) {
-          checkAnswer();
+          checkAnswer(0);
         }
         break;
       case R.id.option_b_button:
         if (checked) {
-          checkAnswer();
+          checkAnswer(1);
         }
         break;
       case R.id.option_c_button:
         if (checked) {
-          checkAnswer();
+          checkAnswer(2);
         }
         break;
     }
   }
 
-  private void checkAnswer(){
-    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
-      getActivity().finish();
-    } else {
-      boolean active = devicePolicyManager.isAdminActive(compName);
-      if (active) {
-        devicePolicyManager.lockNow();
-      }
-    }
-  }
+
 
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 

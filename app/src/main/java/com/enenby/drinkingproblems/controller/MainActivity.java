@@ -3,6 +3,7 @@ package com.enenby.drinkingproblems.controller;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,17 +16,16 @@ import android.view.MenuItem;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.enenby.drinkingproblems.MultiAnswerFragment;
-import com.enenby.drinkingproblems.MultiChoiceFragment;
 import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.ScreenLock;
-import com.enenby.drinkingproblems.TrueFalseFragment;
+import com.enenby.drinkingproblems.controller.QuestionsFragment.QuestionLoader;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.entity.Question;
+import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements QuestionLoader {
 
 
   public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
               "You have enabled the Admin Device Features",
               Toast.LENGTH_LONG).show();
 
-          new QueryTask().execute();
+
 
         } else {
           Toast.makeText(MainActivity.this,
@@ -123,14 +123,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected Void doInBackground(Void... voids) {
-      QuestionsDatabase.getInstance(MainActivity.this).getQuestionDao().select();
+      List<Question> questions = QuestionsDatabase.getInstance(MainActivity.this)
+          .getQuestionDao().select();
+      if (questions.size() == 0){
+        QuestionsDatabase.populateQuestions(MainActivity.this);
+      }
       return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        new QueryTask().execute();
     }
   }
 
 
 
-  private class QueryTask extends AsyncTask<Void, Void, Question> {
+  class QueryTask extends AsyncTask<Void, Void, Question> {
 
     @Override
     protected void onPostExecute(Question question) {
@@ -163,6 +172,12 @@ public class MainActivity extends AppCompatActivity {
       return database.getQuestionDao().selectRandomWithAnswers();
     }
   }
+
+  public void reloadQuestion(){
+    new QueryTask().execute();
+  }
+
+
 
 
 

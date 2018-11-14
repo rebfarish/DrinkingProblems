@@ -1,4 +1,4 @@
-package com.enenby.drinkingproblems;
+package com.enenby.drinkingproblems.controller;
 
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
@@ -14,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.enenby.drinkingproblems.controller.MainActivity;
+import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
-public class TrueFalseFragment extends Fragment implements RadioButton.OnClickListener {
+public class TrueFalseFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
   private RadioButton trueButton;
   private RadioButton falseButton;
@@ -30,9 +29,6 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
   private MathView questionTextView;
   private int correct;
   private View v;
-  private QuestionAndAnswers questionAndAnswers;
-  private DevicePolicyManager devicePolicyManager;
-  private ComponentName compName;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,26 +43,17 @@ public class TrueFalseFragment extends Fragment implements RadioButton.OnClickLi
     switch (view.getId()) {
       case R.id.true_button:
         if (checked) {
-          checkAnswer();
+          checkAnswer(0);
         }
         break;
       case R.id.false_button:
         if (checked) {
-          checkAnswer();
+          checkAnswer(1);
         }
         break;
     }
   }
-  private void checkAnswer(){
-    if (questionAndAnswers.getAnswers().get(0).isCorrect()) {
-      getActivity().finish();
-    } else {
-      boolean active = devicePolicyManager.isAdminActive(compName);
-      if (active) {
-        devicePolicyManager.lockNow();
-      }
-    }
-  }
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,

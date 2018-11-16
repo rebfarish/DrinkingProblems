@@ -7,7 +7,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +53,19 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
     optionAButton.setOnClickListener(this);
     optionBButton.setOnClickListener(this);
     optionCButton.setOnClickListener(this);
+    optionAButton.setEnabled(true);
+    optionBButton.setEnabled(true);
+    optionCButton.setEnabled(true);
+    optionAButton.setClickable(true);
+    optionBButton.setClickable(true);
+    optionCButton.setClickable(true);
+    optionAButton.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+    optionBButton.setOnTouchListener((v1, event) -> true);
+    optionCButton.setOnTouchListener((v1, event) -> true);
+
     devicePolicyManager = (DevicePolicyManager) getActivity()
         .getSystemService(DEVICE_POLICY_SERVICE);
     compName = new ComponentName(getActivity(), ScreenLock.class);

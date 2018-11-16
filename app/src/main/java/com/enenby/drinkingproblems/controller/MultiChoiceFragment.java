@@ -3,30 +3,36 @@ package com.enenby.drinkingproblems.controller;
 import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
+import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
+import com.enenby.drinkingproblems.model.entity.Answer;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
-public class MultiChoiceFragment extends QuestionsFragment implements RadioButton.OnClickListener {
+public class MultiChoiceFragment extends QuestionsFragment implements View.OnClickListener {
 
 
-  private RadioButton optionAButton;
-  private RadioButton optionBButton;
-  private RadioButton optionCButton;
+  private MathView optionAButton;
+  private MathView optionBButton;
+  private MathView optionCButton;
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
@@ -39,7 +45,11 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+
   }
+
+
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,9 +61,41 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
     cabButton = v.findViewById(R.id.cab_button);
     emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
-    optionAButton.setOnClickListener(this);
-    optionBButton.setOnClickListener(this);
-    optionCButton.setOnClickListener(this);
+//    optionAButton.setOnClickListener(this);
+//    optionBButton.setOnClickListener(this);
+//    optionCButton.setOnClickListener(this);
+//    optionAButton.setEnabled(true);
+//    optionBButton.setEnabled(true);
+//    optionCButton.setEnabled(true);
+//    optionAButton.setClickable(true);
+//    optionBButton.setClickable(true);
+//    optionCButton.setClickable(true);
+//    optionAButton.setOnTouchListener(new OnTouchListener() {
+//      @Override
+//      public boolean onTouch(View v1, MotionEvent event) {
+//        v1.performClick();
+//        return true;
+//      }
+//    });
+//    optionBButton.setOnTouchListener((v1, event) -> true);
+//    optionCButton.setOnTouchListener((v1, event) -> true);
+    final List<Answer> saveItems = new ArrayList<>();
+    String answer = null;
+
+    // save your values here to the ItemContent List. usign dummy values as of now
+
+    final CustomAdapter adapter = new CustomAdapter(MainActivity.this, R.layout.activity_main, saveItems);
+    ListView listview = (ListView) v.findViewById(R.id.radioGroup);
+    listview.setAdapter(adapter);
+    listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        adapter.setSelectedIndex(position);
+        adapter.notifyDataSetChanged();
+      }
+    });
+
     devicePolicyManager = (DevicePolicyManager) getActivity()
         .getSystemService(DEVICE_POLICY_SERVICE);
     compName = new ComponentName(getActivity(), ScreenLock.class);
@@ -63,6 +105,12 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
     new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
     return v;
   }
+
+private static Answer answers(int i, final String answer){
+    Answer itemContent = new Answer();
+    itemContent.setText(answer);//Not sure about this line...
+    return itemContent;
+}
 
   public void onClick(View view) {
     // Is the button now checked?
@@ -90,7 +138,7 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
 
 
 
-  private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
+  public class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 
     @Override
     protected void onPostExecute(QuestionAndAnswers questionAndAnswers) {

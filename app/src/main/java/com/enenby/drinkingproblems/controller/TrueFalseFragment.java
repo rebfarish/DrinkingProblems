@@ -3,12 +3,9 @@ package com.enenby.drinkingproblems.controller;
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

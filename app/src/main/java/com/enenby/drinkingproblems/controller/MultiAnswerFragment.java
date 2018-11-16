@@ -2,11 +2,8 @@ package com.enenby.drinkingproblems.controller;
 
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +15,12 @@ import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 
 
-public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.OnClickListener{
+public class MultiAnswerFragment extends QuestionsFragment implements MathView.OnClickListener{
 
-  private CheckBox checkboxA;
-  private CheckBox checkboxB;
-  private CheckBox checkboxC;
-  private CheckBox checkboxD;
+  private MathView checkboxA;
+  private MathView checkboxB;
+  private MathView checkboxC;
+  private MathView checkboxD;
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;

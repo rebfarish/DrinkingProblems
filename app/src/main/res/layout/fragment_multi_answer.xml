@@ -43,36 +43,56 @@
           android:layout_height="wrap_content"
           >
 
-        <CheckBox
+        <io.github.kexanie.library.MathView
           android:id="@+id/checkbox_a"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textAlignment="center"
           android:layout_alignParentTop="true"
           android:layout_margin="8dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:background="@color/colorAccent"
+          app:engine="KaTeX"
           />
 
-        <CheckBox
+        <io.github.kexanie.library.MathView
           android:id="@+id/checkbox_b"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textAlignment="center"
           android:layout_below="@+id/checkbox_a"
           android:layout_margin="8dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:background="@color/colorAccent"
+          app:engine="KaTeX"
           />
 
-        <CheckBox
+        <io.github.kexanie.library.MathView
           android:id="@+id/checkbox_c"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textAlignment="center"
           android:layout_below="@+id/checkbox_b"
           android:layout_margin="8dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:background="@color/colorAccent"
+          app:engine="KaTeX"
           />
 
-        <CheckBox
+        <io.github.kexanie.library.MathView
           android:id="@+id/checkbox_d"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
+          android:textAlignment="center"
           android:layout_below="@id/checkbox_c"
           android:layout_margin="8dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:background="@color/colorAccent"
+          app:engine="KaTeX"
           />
 
   </RelativeLayout>

@@ -18,10 +18,18 @@
     android:elevation="4dp"/>
 
 
-  <FrameLayout
-    android:id="@+id/fragment_container_options"
+  <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-  </FrameLayout>
+  <ListView
+    android:id="@+id/radioGroup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"/>
+
+
+  </RelativeLayout>
 </LinearLayout>

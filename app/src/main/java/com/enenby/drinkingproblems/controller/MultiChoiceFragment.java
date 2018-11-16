@@ -23,9 +23,9 @@ import java.util.Collections;
 public class MultiChoiceFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
 
-  private RadioButton optionAButton;
-  private RadioButton optionBButton;
-  private RadioButton optionCButton;
+  private MathView optionAButton;
+  private MathView optionBButton;
+  private MathView optionCButton;
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
@@ -63,8 +63,15 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
       v1.performClick();
       return true;
     });
-    optionBButton.setOnTouchListener((v1, event) -> true);
-    optionCButton.setOnTouchListener((v1, event) -> true);
+    optionBButton.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+    optionCButton.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+
 
     devicePolicyManager = (DevicePolicyManager) getActivity()
         .getSystemService(DEVICE_POLICY_SERVICE);
@@ -78,24 +85,24 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
 
   public void onClick(View view) {
     // Is the button now checked?
-    boolean checked = ((RadioButton) view).isChecked();
+
 
     // Check which radio button was clicked
     switch (view.getId()) {
       case R.id.option_a_button:
-        if (checked) {
+
           checkAnswer(0);
-        }
+
         break;
       case R.id.option_b_button:
-        if (checked) {
+
           checkAnswer(1);
-        }
+
         break;
       case R.id.option_c_button:
-        if (checked) {
+
           checkAnswer(2);
-        }
+
         break;
     }
   }

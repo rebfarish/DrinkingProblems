@@ -71,57 +71,57 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         aDao.insert(answer1, answer2, answer3);
       }
 
-//      {
-//        Question question = new Question();
-//        Answer answer1 = new Answer();
-//        Answer answer2 = new Answer();
-//        Answer answer3 = new Answer();
-//
-//        question.setText("What is $$\\lim_{x\\to 0}\\frac{\\sinx}{x}$$ \\?");
-//        question.setType(Question.MULTI_CHOICE);
-//        question.setRandomAnswer(true);
-//        long questionId = qDao.insert(question);
-//
-//        answer1.setQuestionId(questionId);
-//        answer1.setText("1");
-//        answer1.setCorrect(true);
-//
-//        answer2.setQuestionId(questionId);
-//        answer2.setText("0");
-//        answer2.setCorrect(false);
-//
-//        answer3.setQuestionId(questionId);
-//        answer3.setText("$$\\infty$$");
-//        answer3.setCorrect(false);
-//
-//        aDao.insert(answer1, answer2, answer3);
-//      }
-//      {
-//        Question question = new Question();
-//        Answer answer1 = new Answer();
-//        Answer answer2 = new Answer();
-//        Answer answer3 = new Answer();
-//
-//        question.setText("The zeros of $$f(x)=x^3-2x^2+x$$");
-//        question.setType(Question.MULTI_CHOICE);
-//        question.setRandomAnswer(true);
-//        long questionId = qDao.insert(question);
-//
-//        answer1.setQuestionId(questionId);
-//        answer1.setText("0,-1");
-//        answer1.setCorrect(true);
-//
-//        answer2.setQuestionId(questionId);
-//        answer2.setText("0,1");
-//        answer2.setCorrect(false);
-//
-//        answer3.setQuestionId(questionId);
-//        answer3.setText("$$-1,1$$");
-//        answer3.setCorrect(false);
-//
-//        aDao.insert(answer1, answer2, answer3);
-//      }
-//
+      {
+        Question question = new Question();
+        Answer answer1 = new Answer();
+        Answer answer2 = new Answer();
+        Answer answer3 = new Answer();
+
+        question.setText("What is $$\\lim_{x\\to 0}\\frac{\\sinx}{x}$$ \\?");
+        question.setType(Question.MULTI_CHOICE);
+        question.setRandomAnswer(true);
+        long questionId = qDao.insert(question);
+
+        answer1.setQuestionId(questionId);
+        answer1.setText("1");
+        answer1.setCorrect(true);
+
+        answer2.setQuestionId(questionId);
+        answer2.setText("0");
+        answer2.setCorrect(false);
+
+        answer3.setQuestionId(questionId);
+        answer3.setText("$$\\infty$$");
+        answer3.setCorrect(false);
+
+        aDao.insert(answer1, answer2, answer3);
+      }
+      {
+        Question question = new Question();
+        Answer answer1 = new Answer();
+        Answer answer2 = new Answer();
+        Answer answer3 = new Answer();
+
+        question.setText("The zeros of $$f(x)=x^3-2x^2+x$$");
+        question.setType(Question.MULTI_CHOICE);
+        question.setRandomAnswer(true);
+        long questionId = qDao.insert(question);
+
+        answer1.setQuestionId(questionId);
+        answer1.setText("0,-1");
+        answer1.setCorrect(true);
+
+        answer2.setQuestionId(questionId);
+        answer2.setText("0,1");
+        answer2.setCorrect(false);
+
+        answer3.setQuestionId(questionId);
+        answer3.setText("$$-1,1$$");
+        answer3.setCorrect(false);
+
+        aDao.insert(answer1, answer2, answer3);
+      }
+
 //      {
 //        Question question = new Question();
 //        Answer answer1 = new Answer();

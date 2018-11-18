@@ -3,8 +3,8 @@ package com.enenby.drinkingproblems.controller;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,13 +19,13 @@ import android.widget.Toast;
 import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
 import com.enenby.drinkingproblems.ScreenLock;
-import com.enenby.drinkingproblems.controller.QuestionsFragment.QuestionLoader;
+import com.enenby.drinkingproblems.controller.QuestionsFragment.PhoneUnlockedReceiver;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.entity.Question;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements QuestionLoader {
+public class MainActivity extends AppCompatActivity implements QuestionsFragment.QuestionLoader {
 
 
   public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
@@ -38,7 +38,16 @@ public class MainActivity extends AppCompatActivity implements QuestionLoader {
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
   public static final int RESULT_ENABLE = 11;
+  private static long lastLockedTime = 0;
 
+
+  public static long getLastLockedTime(){
+    return lastLockedTime;
+  }
+
+  public static void resetLastLockedTime(){
+    lastLockedTime = System.currentTimeMillis();
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements QuestionLoader {
 
     devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
     compName = new ComponentName(this, ScreenLock.class);
+    registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
 
     topToolbar = findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
@@ -183,4 +193,3 @@ public class MainActivity extends AppCompatActivity implements QuestionLoader {
 
 }
 
-//TODO add timer to run in background

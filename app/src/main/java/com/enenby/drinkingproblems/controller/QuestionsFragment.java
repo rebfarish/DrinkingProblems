@@ -61,13 +61,21 @@ public abstract class QuestionsFragment extends Fragment {
 
   }
 
+  /**
+   * Call cab.
+   */
   protected void callCab(){
     //TODO check if phone has Uber installed, give other cab options
     Uri uber = Uri.parse("https://m.uber.com/ul/?client_id=<CLIENT_ID>");
     Intent intent = new Intent(Intent.ACTION_VIEW, uber);
     startActivity(intent);
+
+
   }
 
+  /**
+   * Emergency.
+   */
   protected void emergency(){
     Intent intent = new Intent(Intent.ACTION_DIAL);
     intent.setData(Uri.parse("tel:911"));

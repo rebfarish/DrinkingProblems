@@ -55,6 +55,8 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
     cabButton = v.findViewById(R.id.cab_button);
     emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
+    cabButton.setOnClickListener(this);
+    emergencyButton.setOnClickListener(this);
     optionAButton.setOnClickListener(this);
     optionBButton.setOnClickListener(this);
     optionCButton.setOnClickListener(this);
@@ -107,8 +109,18 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
         checkAnswer(2);
 
         break;
+
+      case R.id.cab_button:
+        callCab();
+        break;
+
+      case R.id.emergency_button:
+        emergency();
+        break;
     }
     }
+
+
 
     private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 

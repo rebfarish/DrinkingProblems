@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 
@@ -59,6 +60,20 @@ public abstract class QuestionsFragment extends Fragment {
     }
 
   }
+
+  protected void callCab(){
+    //TODO check if phone has Uber installed, give other cab options
+    Uri uber = Uri.parse("https://m.uber.com/ul/?client_id=<CLIENT_ID>");
+    Intent intent = new Intent(Intent.ACTION_VIEW, uber);
+    startActivity(intent);
+  }
+
+  protected void emergency(){
+    Intent intent = new Intent(Intent.ACTION_DIAL);
+    intent.setData(Uri.parse("tel:911"));
+    startActivity(intent);
+  }
+
 
   /**
    * The type Phone unlocked receiver.

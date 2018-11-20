@@ -65,6 +65,8 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
     submit.setOnClickListener(this);
+    cabButton.setOnClickListener(this);
+    emergencyButton.setOnClickListener(this);
     mathButtonA.setOnClickListener(this);
     mathButtonB.setOnClickListener(this);
     mathButtonC.setOnClickListener(this);
@@ -124,6 +126,13 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
         break;
       case R.id.submit:
         checkAnswer();
+        break;
+      case R.id.cab_button:
+        callCab();
+        break;
+
+      case R.id.emergency_button:
+        emergency();
         break;
     }
   }

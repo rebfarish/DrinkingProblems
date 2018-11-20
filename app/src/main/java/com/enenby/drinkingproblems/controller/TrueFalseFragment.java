@@ -51,6 +51,8 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
     cabButton = v.findViewById(R.id.cab_button);
     emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
+    cabButton.setOnClickListener(this);
+    emergencyButton.setOnClickListener(this);
     trueButton.setOnClickListener(this);
     falseButton.setOnClickListener(this);
 
@@ -79,6 +81,13 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
         if (checked) {
           checkAnswer(1);
         }
+        break;
+      case R.id.cab_button:
+        callCab();
+        break;
+
+      case R.id.emergency_button:
+        emergency();
         break;
     }
   }

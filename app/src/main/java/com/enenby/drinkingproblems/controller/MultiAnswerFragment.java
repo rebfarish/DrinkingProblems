@@ -1,23 +1,29 @@
 package com.enenby.drinkingproblems.controller;
 
+import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.enenby.drinkingproblems.R;
+import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
+import java.util.Collections;
+//try adding another card view putting in relative layout with checkboxes and putting latex on card
 
-
+/**
+ * This fragment displays a multiple answer question.
+ */
 public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.OnClickListener{
 
   private CheckBox checkboxA;
@@ -27,7 +33,11 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
-
+  private MathView mathButtonA;
+  private MathView mathButtonB;
+  private MathView mathButtonC;
+  private MathView mathButtonD;
+  private Button submit;
 
 
   @Override
@@ -35,34 +45,6 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     super.onCreate(savedInstanceState);
   }
 
-  public void onClick(View view){
-    //Is the checkbox checked?
-    boolean checked = ((CheckBox) view).isChecked();
-
-      // Check which radio button was clicked
-      switch (view.getId()) {
-        case R.id.checkbox_a:
-          if (checked) {
-            checkAnswer(0);
-          }
-          break;
-        case R.id.checkbox_b:
-          if (checked) {
-            checkAnswer(1);
-          }
-          break;
-        case R.id.checkbox_c:
-          if (checked) {
-          checkAnswer(2);
-        }
-          break;
-        case R.id.checkbox_d:
-          if (checked) {
-            checkAnswer(3);
-          }
-          break;
-      }
-  }
 
 
   @Override
@@ -74,14 +56,48 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     checkboxB = v.findViewById(R.id.checkbox_b);
     checkboxC = v.findViewById(R.id.checkbox_c);
     checkboxD = v.findViewById(R.id.checkbox_d);
+    mathButtonA = v.findViewById(R.id.checkbox_a_button);
+    mathButtonB = v.findViewById(R.id.checkbox_b_button);
+    mathButtonC = v.findViewById(R.id.checkbox_c_button);
+    mathButtonD = v.findViewById(R.id.checkbox_d_button);
+    submit = v.findViewById(R.id.submit);
     cabButton = v.findViewById(R.id.cab_button);
     emergencyButton = v.findViewById(R.id.emergency_button);
     questionTextView = v.findViewById(R.id.question_text);
-    checkboxA.setOnClickListener(this);
-    checkboxB.setOnClickListener(this);
-    checkboxC.setOnClickListener(this);
-    checkboxD.setOnClickListener(this);
+    submit.setOnClickListener(this);
+    mathButtonA.setOnClickListener(this);
+    mathButtonB.setOnClickListener(this);
+    mathButtonC.setOnClickListener(this);
+    mathButtonD.setOnClickListener(this);
+    mathButtonA.setEnabled(true);
+    mathButtonB.setEnabled(true);
+    mathButtonC.setEnabled(true);
+    mathButtonD.setEnabled(true);
+    mathButtonA.setClickable(true);
+    mathButtonB.setClickable(true);
+    mathButtonC.setClickable(true);
+    mathButtonD.setClickable(true);
+    mathButtonA.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+    mathButtonB.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+    mathButtonC.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
+    mathButtonD.setOnTouchListener((v1, event) -> {
+      v1.performClick();
+      return true;
+    });
 
+
+    devicePolicyManager = (DevicePolicyManager) getActivity()
+        .getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(getActivity(), ScreenLock.class);
 
     Bundle bundle = getArguments();
 
@@ -89,17 +105,53 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     return v;
   }
 
+  public void onClick(View view){
+    //Is the checkbox checked?
+
+    // Check which radio button was clicked
+    switch (view.getId()) {
+      case R.id.checkbox_a_button:
+          checkboxA.setChecked(true);
+        break;
+      case R.id.checkbox_b_button:
+        checkboxB.setChecked(true);
+        break;
+      case R.id.checkbox_c_button:
+        checkboxC.setChecked(true);
+        break;
+      case R.id.checkbox_d_button:
+        checkboxD.setChecked(true);
+        break;
+      case R.id.submit:
+        checkAnswer();
+        break;
+    }
+  }
+
+  private void checkAnswer (){
+    if(checkboxA.isChecked() == questionAndAnswers.getAnswers().get(0).isCorrect()&&
+    checkboxB.isChecked() == questionAndAnswers.getAnswers().get(1).isCorrect() &&
+    checkboxC.isChecked() == questionAndAnswers.getAnswers().get(2).isCorrect() &&
+    checkboxD.isChecked() == questionAndAnswers.getAnswers().get(3).isCorrect()){
+      handleAnswer(true);
+    }else{
+      handleAnswer(false);
+    }
+  }
 
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 
     @Override
     protected void onPostExecute(QuestionAndAnswers questionAndAnswers) {
       super.onPostExecute(questionAndAnswers);
+      if (questionAndAnswers.getQuestion().isRandomAnswer()) {
+        Collections.shuffle(questionAndAnswers.getAnswers());
+      }
 
-      checkboxA.setText(questionAndAnswers.getAnswers().get(0).getText());
-      checkboxB.setText(questionAndAnswers.getAnswers().get(1).getText());
-      checkboxC.setText(questionAndAnswers.getAnswers().get(2).getText());
-      checkboxD.setText(questionAndAnswers.getAnswers().get(3).getText());
+      mathButtonA.setText(questionAndAnswers.getAnswers().get(0).getText());
+      mathButtonB.setText(questionAndAnswers.getAnswers().get(1).getText());
+      mathButtonC.setText(questionAndAnswers.getAnswers().get(2).getText());
+      mathButtonD.setText(questionAndAnswers.getAnswers().get(3).getText());
       questionTextView.setText(questionAndAnswers.getQuestion().getText());
 
       MultiAnswerFragment.this.questionAndAnswers=questionAndAnswers;

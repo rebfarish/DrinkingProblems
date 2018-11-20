@@ -7,12 +7,27 @@ import android.arch.persistence.room.Query;
 import com.enenby.drinkingproblems.model.entity.Answer;
 import java.util.List;
 
+/**
+ * The interface Answer dao.
+ */
 @Dao
 public interface AnswerDao {
 
+  /**
+   * Insert list.
+   *
+   * @param answers the answers
+   * @return the list
+   */
   @Insert (onConflict = OnConflictStrategy.FAIL)
   List<Long> insert(Answer... answers);
 
+  /**
+   * Select list.
+   *
+   * @param questionId the question id
+   * @return the list
+   */
   @Query("SELECT * FROM Answer WHERE question_id = :questionId ORDER BY answer_id")
   List<Answer> select(long questionId);
 

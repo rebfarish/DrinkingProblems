@@ -11,76 +11,146 @@
   <android.support.v7.widget.CardView
     android:id="@+id/ma_question_card"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toTopOf="@id/checkbox_card"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     android:elevation="10dp">
 
-  <io.github.kexanie.library.MathView
-    android:id="@+id/question_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textAlignment="center"
-    app:engine="KaTeX"/>
+    <io.github.kexanie.library.MathView
+      android:id="@+id/question_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+      app:engine="KaTeX"/>
 
   </android.support.v7.widget.CardView>
-
 
   <android.support.v7.widget.CardView
     android:id="@+id/checkbox_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintRight_toLeftOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/ma_question_card"
     app:layout_constraintBottom_toTopOf="@+id/cab_button">
 
 
-        <RelativeLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          >
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
 
-        <CheckBox
-          android:id="@+id/checkbox_a"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentTop="true"
-          android:layout_margin="8dp"
-          />
+    <io.github.kexanie.library.MathView
+      android:id="@+id/checkbox_a_button"
+      android:layout_width="wrap_content"
+      android:layout_height="48dp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentStart="false"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentTop="true"
+      android:textAlignment="center"
+      android:layout_toEndOf="@+id/checkbox_a"
+      android:clickable="true"
+      android:focusable="true"
+      app:engine="KaTeX"/>
 
-        <CheckBox
-          android:id="@+id/checkbox_b"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/checkbox_a"
-          android:layout_margin="8dp"
-          />
+    <io.github.kexanie.library.MathView
+      android:id="@+id/checkbox_b_button"
+      android:layout_width="wrap_content"
+      android:layout_height="48dp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentStart="false"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@+id/checkbox_a_button"
+      android:textAlignment="center"
+      android:layout_toEndOf="@+id/checkbox_b"
+      android:clickable="true"
+      android:focusable="true"
+      app:engine="KaTeX"/>
 
-        <CheckBox
-          android:id="@+id/checkbox_c"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/checkbox_b"
-          android:layout_margin="8dp"
-          />
+    <io.github.kexanie.library.MathView
+      android:id="@+id/checkbox_c_button"
+      android:layout_width="wrap_content"
+      android:layout_height="48dp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentStart="false"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@+id/checkbox_b_button"
+      android:textAlignment="center"
+      android:layout_toEndOf="@+id/checkbox_c"
+      android:clickable="true"
+      android:focusable="true"
+      app:engine="KaTeX"/>
 
-        <CheckBox
-          android:id="@+id/checkbox_d"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@id/checkbox_c"
-          android:layout_margin="8dp"
-          />
+    <io.github.kexanie.library.MathView
+      android:id="@+id/checkbox_d_button"
+      android:layout_width="wrap_content"
+      android:layout_height="48dp"
+      android:layout_centerInParent="true"
+      android:layout_alignParentStart="false"
+      android:layout_alignParentEnd="true"
+      android:layout_below="@+id/checkbox_c_button"
+      android:textAlignment="center"
+      android:layout_toEndOf="@+id/checkbox_d"
+      android:clickable="true"
+      android:focusable="true"
+      app:engine="KaTeX"/>
 
-  </RelativeLayout>
+      <CheckBox
+        android:id="@+id/checkbox_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentTop="true"
+
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/checkbox_a"
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/checkbox_b"
+
+        />
+
+      <CheckBox
+        android:id="@+id/checkbox_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_below="@+id/checkbox_c"
+        />
+    </RelativeLayout>
   </android.support.v7.widget.CardView>
 
 
-
-
+  <Button
+    android:id="@+id/submit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="submit"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toRightOf="@id/emergency_button"
+    app:layout_constraintRight_toLeftOf="@id/cab_button"/>
 
   <TextView
     android:id="@+id/cab_button"

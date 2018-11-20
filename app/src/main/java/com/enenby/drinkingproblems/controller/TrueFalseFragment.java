@@ -1,6 +1,7 @@
 package com.enenby.drinkingproblems.controller;
 
 
+import static android.content.Context.DEVICE_POLICY_SERVICE;
 import static com.enenby.drinkingproblems.controller.MainActivity.QUESTION_ID;
 
 import android.app.admin.DevicePolicyManager;
@@ -8,18 +9,21 @@ import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import com.enenby.drinkingproblems.R;
+import com.enenby.drinkingproblems.ScreenLock;
 import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
+/**
+ * The type True false fragment.
+ */
 public class TrueFalseFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
   private RadioButton trueButton;
@@ -33,6 +37,31 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+  }
+
+
+
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    View v = inflater.inflate(R.layout.fragment_true_false, container, false);
+    trueButton = v.findViewById(R.id.true_button);
+    falseButton = v.findViewById(R.id.false_button);
+    cabButton = v.findViewById(R.id.cab_button);
+    emergencyButton = v.findViewById(R.id.emergency_button);
+    questionTextView = v.findViewById(R.id.question_text);
+    trueButton.setOnClickListener(this);
+    falseButton.setOnClickListener(this);
+
+    devicePolicyManager = (DevicePolicyManager) getActivity()
+        .getSystemService(DEVICE_POLICY_SERVICE);
+    compName = new ComponentName(getActivity(), ScreenLock.class);
+
+    Bundle bundle = getArguments();
+    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
+
+    return v;
   }
 
   @Override
@@ -54,25 +83,6 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
     }
   }
 
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    View v = inflater.inflate(R.layout.fragment_true_false, container, false);
-    trueButton = v.findViewById(R.id.true_button);
-    falseButton = v.findViewById(R.id.false_button);
-    cabButton = v.findViewById(R.id.cab_button);
-    emergencyButton = v.findViewById(R.id.emergency_button);
-    questionTextView = v.findViewById(R.id.question_text);
-    trueButton.setOnClickListener(this);
-    falseButton.setOnClickListener(this);
-
-    Bundle bundle = getArguments();
-    new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
-
-    return v;
-  }
 
   private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
 

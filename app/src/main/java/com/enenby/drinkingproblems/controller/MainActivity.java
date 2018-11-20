@@ -25,10 +25,19 @@ import com.enenby.drinkingproblems.model.entity.Question;
 import java.util.List;
 
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity implements QuestionsFragment.QuestionLoader {
 
 
+  /**
+   * The constant QUESTION_AND_ANSWER.
+   */
   public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
+  /**
+   * The constant QUESTION_ID.
+   */
   public static final String QUESTION_ID = "QuestionId";
   private TextView questionText;
   private int correct;
@@ -37,14 +46,25 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   private QuestionsDatabase database;
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
+  /**
+   * The constant RESULT_ENABLE.
+   */
   public static final int RESULT_ENABLE = 11;
   private static long lastLockedTime = 0;
 
 
+  /**
+   * Get last locked time long.
+   *
+   * @return the long
+   */
   public static long getLastLockedTime(){
     return lastLockedTime;
   }
 
+  /**
+   * Reset last locked time.
+   */
   public static void resetLastLockedTime(){
     lastLockedTime = System.currentTimeMillis();
   }
@@ -62,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     setSupportActionBar(topToolbar);
 
     database = QuestionsDatabase.getInstance(this);
-    new InitializeDataBase().execute();
+
 
     Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
     intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
@@ -73,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    new InitializeDataBase().execute();
     switch (requestCode) {
       case RESULT_ENABLE:
         if (resultCode == Activity.RESULT_OK) {
@@ -113,9 +134,9 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
       fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
 
     } else if (id == R.id.arrow_back) {
-      Toast.makeText(MainActivity.this, "Back Arrow clicked", Toast.LENGTH_LONG).show();
+      Toast.makeText(MainActivity.this, "You pressed the back button! Hurray!", Toast.LENGTH_LONG).show();
     }
-    //TODO make tool bar buttons navigate to where they should go, get rid of toasts
+    //TODO make tool bar buttons navigate to where they should go
     return super.onOptionsItemSelected(item);
   }
 
@@ -148,7 +169,9 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   }
 
 
-
+  /**
+   * The type Query task.
+   */
   class QueryTask extends AsyncTask<Void, Void, Question> {
 
     @Override

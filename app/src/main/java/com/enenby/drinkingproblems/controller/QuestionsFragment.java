@@ -9,17 +9,34 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 
+/**
+ * The type Questions fragment.
+ */
 public abstract class QuestionsFragment extends Fragment {
 
+  /**
+   * The Question and answers.
+   */
   protected QuestionAndAnswers questionAndAnswers;
+  /**
+   * The constant devicePolicyManager.
+   */
   protected static DevicePolicyManager devicePolicyManager;
+  /**
+   * The Comp name.
+   */
   protected ComponentName compName;
 
 
-  protected void checkAnswer(int i){
-    if (questionAndAnswers.getAnswers().get(i).isCorrect()) {
+  /**
+   * Handle answer.
+   *
+   * @param isCorrect the is correct
+   */
+  protected void handleAnswer(boolean isCorrect){
+    if(isCorrect){
       getActivity().finish();
-    } else {
+    }else {
       boolean active = devicePolicyManager.isAdminActive(compName);
       if (active) {
         MainActivity.resetLastLockedTime();
@@ -29,6 +46,23 @@ public abstract class QuestionsFragment extends Fragment {
     }
   }
 
+  /**
+   * Check answer.
+   *
+   * @param i the
+   */
+  protected void checkAnswer(int i){
+    if (questionAndAnswers.getAnswers().get(i).isCorrect()) {
+      handleAnswer(true);
+    }else{
+      handleAnswer(false);
+    }
+
+  }
+
+  /**
+   * The type Phone unlocked receiver.
+   */
   public static class PhoneUnlockedReceiver extends BroadcastReceiver {
 
 
@@ -49,7 +83,14 @@ public abstract class QuestionsFragment extends Fragment {
     }
   }
 
+  /**
+   * The interface Question loader.
+   */
   interface QuestionLoader{
+
+    /**
+     * Reload question.
+     */
     void reloadQuestion();
   }
 

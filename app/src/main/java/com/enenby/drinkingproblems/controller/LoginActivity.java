@@ -13,6 +13,9 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+/**
+ * The type Login activity.
+ */
 public class LoginActivity extends AppCompatActivity {
 
   private static final int REQUEST_CODE = 1000;

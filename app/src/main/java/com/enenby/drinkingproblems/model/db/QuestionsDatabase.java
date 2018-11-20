@@ -11,6 +11,9 @@ import com.enenby.drinkingproblems.model.entity.Answer;
 import com.enenby.drinkingproblems.model.entity.Question;
 
 
+/**
+ * This is a database of math questions.
+ */
 @Database(
     entities = {Answer.class, Question.class},
     version = 1,
@@ -23,6 +26,12 @@ public abstract class QuestionsDatabase extends RoomDatabase {
   private static QuestionsDatabase instance = null;
 
 
+  /**
+   * Gets instance.
+   *
+   * @param context the context
+   * @return the instance
+   */
   public synchronized static QuestionsDatabase getInstance(Context context) {
     if (instance == null) {
       instance = Room.databaseBuilder(context.getApplicationContext(), QuestionsDatabase.class,
@@ -32,15 +41,35 @@ public abstract class QuestionsDatabase extends RoomDatabase {
     return instance;
   }
 
+  /**
+   * Forget instance.
+   *
+   * @param context the context
+   */
   public synchronized static void forgetInstance(Context context) {
     instance = null;
 
   }
 
+  /**
+   * Gets answer dao.
+   *
+   * @return the answer dao
+   */
   public abstract AnswerDao getAnswerDao();
 
+  /**
+   * Gets question dao.
+   *
+   * @return the question dao
+   */
   public abstract QuestionDao getQuestionDao();
 
+  /**
+   * Populate questions.
+   *
+   * @param context the context
+   */
   public static void populateQuestions(Context context) {
       QuestionsDatabase db = getInstance(context);
       QuestionDao qDao = db.getQuestionDao();
@@ -83,11 +112,11 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         long questionId = qDao.insert(question);
 
         answer1.setQuestionId(questionId);
-        answer1.setText("1");
+        answer1.setText("$$1$$");
         answer1.setCorrect(true);
 
         answer2.setQuestionId(questionId);
-        answer2.setText("0");
+        answer2.setText("$$0$$");
         answer2.setCorrect(false);
 
         answer3.setQuestionId(questionId);
@@ -96,6 +125,34 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 
         aDao.insert(answer1, answer2, answer3);
       }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+      Answer answer4 = new Answer();
+
+      question.setText("Quick sort and merge sort are both examples of which big O notation?");
+      question.setType(Question.MULTI_CHOICE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$O(n)$$");
+      answer1.setCorrect(false);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$O(n\\log(n))$$");
+      answer2.setCorrect(true);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$O(\\log(n))$$");
+      answer3.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3);
+
+    }
       {
         Question question = new Question();
         Answer answer1 = new Answer();
@@ -108,11 +165,11 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         long questionId = qDao.insert(question);
 
         answer1.setQuestionId(questionId);
-        answer1.setText("0,-1");
+        answer1.setText("$$0,-1$$");
         answer1.setCorrect(true);
 
         answer2.setQuestionId(questionId);
-        answer2.setText("0,1");
+        answer2.setText("$$0,1$$");
         answer2.setCorrect(false);
 
         answer3.setQuestionId(questionId);
@@ -143,6 +200,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 //        aDao.insert(answer1, answer2);
 //      }
 //
+//
 //      {
 //        Question question = new Question();
 //        Answer answer1 = new Answer();
@@ -168,7 +226,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 //        answer3.setCorrect(false);
 //
 //        answer4.setQuestionId(questionId);
-//        answer4.setText("None of the Above");
+//        answer4.setText("$$None of the Above$$");
 //        answer4.setCorrect(false);
 //
 //        aDao.insert(answer1, answer2, answer3, answer4);

@@ -45,6 +45,7 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
+//    hideSystemUI();
     View v = inflater.inflate(R.layout.fragment_true_false, container, false);
     trueButton = v.findViewById(R.id.true_button);
     falseButton = v.findViewById(R.id.false_button);

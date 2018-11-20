@@ -3,8 +3,10 @@ package com.enenby.drinkingproblems.controller;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,21 +56,6 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   private static long lastLockedTime = 0;
 
 
-  /**
-   * Get last locked time long.
-   *
-   * @return the long
-   */
-  public static long getLastLockedTime(){
-    return lastLockedTime;
-  }
-
-  /**
-   * Reset last locked time.
-   */
-  public static void resetLastLockedTime(){
-    lastLockedTime = System.currentTimeMillis();
-  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +130,20 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    View decorView = getWindow().getDecorView();
+    decorView.setSystemUiVisibility(
+        View.SYSTEM_UI_FLAG_IMMERSIVE
+            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            // Hide the nav bar and status bar
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_FULLSCREEN);
+  }
+
+  @Override
   protected void onStop() {
     database = null;
     QuestionsDatabase.forgetInstance(this);
@@ -210,7 +212,37 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     new QueryTask().execute();
   }
 
+private void saveToSharedPrefs(String s){
+  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor = sharedPreferences.edit();
+  editor.putString(getString(R.string.string_key),s);
+  editor.apply();
+}
 
+private String getFromSharedPrefs(){
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    return sharedPreferences.getString("string_key", "");
+
+}
+
+
+
+
+  /**
+   * Get last locked time long.
+   *
+   * @return the long
+   */
+  public static long getLastLockedTime(){
+    return lastLockedTime;
+  }
+
+  /**
+   * Reset last locked time.
+   */
+  public static void resetLastLockedTime(){
+    lastLockedTime = System.currentTimeMillis();
+  }
 
 
 

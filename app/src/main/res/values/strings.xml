@@ -8,5 +8,6 @@
   <string name="geo_taxi">Geo Located Taxi</string>
   <string name="help">Help</string>
   <string name="sign_in_error">Unable to sign in. Please check your credentials and connection.</string>
+  <string name="string_key">Correct Tally</string>
 
 </resources>

@@ -106,7 +106,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         Answer answer2 = new Answer();
         Answer answer3 = new Answer();
 
-        question.setText("What is $$\\lim_{x\\to 0}\\frac{\\sinx}{x}$$ \\?");
+        question.setText("What is $$\\lim_{x\\to 0}\\frac{\\sinx}{x}$$?");
         question.setType(Question.MULTI_CHOICE);
         question.setRandomAnswer(true);
         long questionId = qDao.insert(question);

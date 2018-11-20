@@ -48,6 +48,7 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
+//    hideSystemUI();
     View v = inflater.inflate(R.layout.fragment_multi_choice, container, false);
     optionAButton = v.findViewById(R.id.option_a_button);
     optionBButton = v.findViewById(R.id.option_b_button);

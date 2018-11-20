@@ -43,6 +43,7 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
   }
 
 
@@ -51,6 +52,7 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
+//    hideSystemUI();
     View v = inflater.inflate(R.layout.fragment_multi_answer, container, false);
     checkboxA = v.findViewById(R.id.checkbox_a);
     checkboxB = v.findViewById(R.id.checkbox_b);

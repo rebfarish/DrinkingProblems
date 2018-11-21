@@ -3,8 +3,10 @@ package com.enenby.drinkingproblems.controller;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -139,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
             // Hide the nav bar and status bar
             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    String strIncorrect = getResources().getString(R.string.incorrect_toast,
+        QuestionsFragment.incorrect);
+    Toast.makeText(MainActivity.this, strIncorrect,Toast.LENGTH_LONG);
+
   }
 
   @Override
@@ -210,25 +216,17 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     new QueryTask().execute();
   }
 
-//private void saveToSharedPrefs(int tally){
-//  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-//  SharedPreferences.Editor editor = sharedPreferences.edit();
-//  editor.putString(getString(R.string.string_key),tally);
-//  editor.apply();
-//}
-//
-//private String getFromSharedPrefs(){
-//    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-//    return sharedPreferences.getString(getString(R.string.string_key), "");
-//
-//}
-//
-//  @Override
-//  protected void onSaveInstanceState(Bundle outState) {
-//    Log.v("MainActivity", "Saving State");
-//    outState.putString(getString(R.string.bundle_string_key),incorrect.getText().toString());
-//    super.onSaveInstanceState(outState);
-//  }
+public void saveToSharedPrefs(int tally){
+  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+  SharedPreferences.Editor editor = sharedPreferences.edit();
+  editor.putInt(getString(R.string.string_key),tally);
+  editor.apply();
+}
+
+public int getFromSharedPrefs(){
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    return sharedPreferences.getInt(getString(R.string.string_key), 0);
+}
 
   /**
    * Get last locked time long.

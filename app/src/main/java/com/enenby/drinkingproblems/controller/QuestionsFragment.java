@@ -15,7 +15,7 @@ import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
  */
 public abstract class QuestionsFragment extends Fragment {
 
-  protected int incorrect = 0;
+ public static int incorrect = 0;
   /**
    * The Question and answers.
    */
@@ -35,7 +35,7 @@ public abstract class QuestionsFragment extends Fragment {
    *
    * @param isCorrect the is correct
    */
-  protected void handleAnswer(boolean isCorrect){
+  public void handleAnswer(boolean isCorrect){
     if(isCorrect){
       getActivity().finish();
     }else {
@@ -43,8 +43,10 @@ public abstract class QuestionsFragment extends Fragment {
       if (active) {
         MainActivity.resetLastLockedTime();
         devicePolicyManager.lockNow();
-        incorrect++;
+        incorrect = ((MainActivity) getActivity()).getFromSharedPrefs() +1;
+        ((MainActivity) getActivity()).saveToSharedPrefs(incorrect);
         ((QuestionLoader) getActivity()).reloadQuestion();
+
       }
     }
   }

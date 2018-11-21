@@ -52,8 +52,6 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-
-
     View v = inflater.inflate(R.layout.fragment_multi_answer, container, false);
     checkboxA = v.findViewById(R.id.checkbox_a);
     checkboxB = v.findViewById(R.id.checkbox_b);

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 
 /**
@@ -16,6 +15,7 @@ import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
  */
 public abstract class QuestionsFragment extends Fragment {
 
+  protected int incorrect = 0;
   /**
    * The Question and answers.
    */
@@ -28,6 +28,7 @@ public abstract class QuestionsFragment extends Fragment {
    * The Comp name.
    */
   protected ComponentName compName;
+
 
   /**
    * Handle answer.
@@ -42,6 +43,7 @@ public abstract class QuestionsFragment extends Fragment {
       if (active) {
         MainActivity.resetLastLockedTime();
         devicePolicyManager.lockNow();
+        incorrect++;
         ((QuestionLoader) getActivity()).reloadQuestion();
       }
     }
@@ -60,8 +62,6 @@ public abstract class QuestionsFragment extends Fragment {
     }
 
   }
-
-
 
 
   /**
@@ -107,7 +107,6 @@ public abstract class QuestionsFragment extends Fragment {
 
       }
 
-
     }
   }
 
@@ -122,16 +121,5 @@ public abstract class QuestionsFragment extends Fragment {
     void reloadQuestion();
   }
 
-  public void hideSystemUI(){
-    final View decorView = getActivity().getWindow().getDecorView();
-    decorView.setSystemUiVisibility(
-        View.SYSTEM_UI_FLAG_IMMERSIVE
-            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            // Hide the nav bar and status bar
-            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_FULLSCREEN);
-  }
 
 }

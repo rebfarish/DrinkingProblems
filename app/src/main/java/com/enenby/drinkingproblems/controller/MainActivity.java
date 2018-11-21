@@ -3,10 +3,8 @@ package com.enenby.drinkingproblems.controller;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   private static long lastLockedTime = 0;
 
 
-
+//TODO check to see if already signed in then just load fragment
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
     intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
     intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-        "App needs permission to lock screen");
+        getString(R.string.lock_screen_permission));
     startActivityForResult(intent, RESULT_ENABLE);
   }
 
@@ -86,14 +84,14 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
       case RESULT_ENABLE:
         if (resultCode == Activity.RESULT_OK) {
           Toast.makeText(MainActivity.this,
-              "You have enabled the Admin Device Features",
+              R.string.enable_admin,
               Toast.LENGTH_LONG).show();
 
 
 
         } else {
           Toast.makeText(MainActivity.this,
-              "Cannot enable Admin Device Features",
+              R.string.cannot_enable_admin,
               Toast.LENGTH_LONG).show();
         }
         break;
@@ -122,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
       fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
 
     } else if (id == R.id.arrow_back) {
-      Toast.makeText(MainActivity.this, "You pressed the back button! Hurray!", Toast.LENGTH_LONG).show();
+      Toast.makeText(MainActivity.this, R.string.back_button, Toast.LENGTH_LONG).show();
     }
     //TODO make tool bar buttons navigate to where they should go
     return super.onOptionsItemSelected(item);
@@ -212,21 +210,25 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     new QueryTask().execute();
   }
 
-private void saveToSharedPrefs(String s){
-  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-  SharedPreferences.Editor editor = sharedPreferences.edit();
-  editor.putString(getString(R.string.string_key),s);
-  editor.apply();
-}
-
-private String getFromSharedPrefs(){
-    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-    return sharedPreferences.getString("string_key", "");
-
-}
-
-
-
+//private void saveToSharedPrefs(int tally){
+//  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+//  SharedPreferences.Editor editor = sharedPreferences.edit();
+//  editor.putString(getString(R.string.string_key),tally);
+//  editor.apply();
+//}
+//
+//private String getFromSharedPrefs(){
+//    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+//    return sharedPreferences.getString(getString(R.string.string_key), "");
+//
+//}
+//
+//  @Override
+//  protected void onSaveInstanceState(Bundle outState) {
+//    Log.v("MainActivity", "Saving State");
+//    outState.putString(getString(R.string.bundle_string_key),incorrect.getText().toString());
+//    super.onSaveInstanceState(outState);
+//  }
 
   /**
    * Get last locked time long.

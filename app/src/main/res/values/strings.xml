@@ -8,6 +8,11 @@
   <string name="geo_taxi">Geo Located Taxi</string>
   <string name="help">Help</string>
   <string name="sign_in_error">Unable to sign in. Please check your credentials and connection.</string>
-  <string name="string_key">Correct Tally</string>
+  <string name="string_key" translatable="false">Correct Tally</string>
+  <string name="bundle_string_key" translatable="false">BUNDLE_STRING_KEY</string>
+  <string name="back_button">You pressed the back button! Hurray!</string>
+  <string name="enable_admin">You have enabled the Admin Device Features</string>
+  <string name="cannot_enable_admin">Cannot enable Admin Device Features</string>
+  <string name="lock_screen_permission">App needs permission to lock screen</string>
 
 </resources>

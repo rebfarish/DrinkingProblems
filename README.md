@@ -50,17 +50,13 @@ The current design is very basic. The buttons could be styled differently, possi
 
 [DDL](drinking_problems.ddl)
 
-[Javadoc](/docs/api/index.html)
+[Javadoc](docs/api/index.html)
 
-[Licenses](licenses.md)
+[Licenses](Licenses.md)
 
 [Instructions for building Drinking Problems](BuildInstructions.md)
 
 [Instructions for using Drinking Problems](UserInstuctions.md)
-
-
-
-[Instructions for using Drinking Problems]
 
  
 

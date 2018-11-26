@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 /**
- * This fracment displays the Options menu.
+ * This fragment displays the Options menu.
  */
 public class OptionsMenu extends Fragment {
 

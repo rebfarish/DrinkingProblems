@@ -1,4 +1,4 @@
-#User Stories
+# User Stories
 
 1. As a user with strong math skills and an affinity for adult beverages, I want an app that will lock me out of my phone to prevent me from sending unwanted drunk texts or drunk dials.
    - I want to always have the option to make certain calls if my phone is locked for example 911, cab company (or access to Uber/Lyft...) and possibly certain contacts like best friend, spouse etc.

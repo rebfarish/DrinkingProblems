@@ -42,7 +42,7 @@ The current design is very basic. The buttons could be styled differently, possi
 
 ## Relevant Links
 
-[my wireframe](AndroidProject.pdf)
+[my wireframe](WireFrame.pdf)
 
 [User Stories](UserStories.md)
 
@@ -56,7 +56,7 @@ The current design is very basic. The buttons could be styled differently, possi
 
 [Instructions for building Drinking Problems](BuildInstructions.md)
 
-[Instructions for using Drinking Problems](UserInstuctions.md)
+[Instructions for using Drinking Problems](UserInstructions.md)
 
  
 

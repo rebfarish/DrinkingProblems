@@ -52,9 +52,13 @@ The current design is very basic. The buttons could be styled differently, possi
 
 [Javadoc](/docs/api/index.html)
 
-[Licenses]
+[Licenses](licenses.md)
 
-[Instructions for building Drinking Problems]
+[Instructions for building Drinking Problems](BuildInstructions.md)
+
+[Instructions for using Drinking Problems](UserInstuctions.md)
+
+
 
 [Instructions for using Drinking Problems]
 

@@ -1,42 +1,63 @@
 # Drinking Problems
 
+----
+Drinking Problems is an Android app for users who are drinking adult beverages. The aim is to prevent users from sending unwanted/bad decision texts and calls. It is ideal for users with a strong math background such as Mathematicians and Engineers.
 
-* What's the basic functionality of the app?
+## Current State of Completion
 
-  The app will ask you multiple choice difficult math questions to unlock the user's phone. If the user answers incorrectly OR doesn't answer within a given amount of time the questions will get more difficult.
-  
-  [ERD](DrinkingProbsERD.PNG)
+When opened, the app will load a randomly selected question from the database. If the user answers the question correctly, the app will close. If answered incorrectly, the app will lock the screen for a set amount of time (currently this is set to one minute).
 
-* Construct at least 2 wireframe diagrams for your app; include them in your repository in PDF form.
+There are a few elements that need to be corrected for a usable prototype. Firstly, if the user swipes up from the bottom of the screen the navigation bar will appear, allowing the user to simply back out of the app without answering a question. Secondly, the app has a limited bank of questions to pull from. After some time with the app a user could simply have the answers memorized. Lastly, the menu options don’t do much. This fragment needs to be more fleshed out.
 
-[my wireframe](AndroidProject.pdf) 
+## API Versions and Hardware
 
-[my wireframe2](AndroidProject2.pdf)
+The minimum required Android API is 21. It has been successfully tested on emulators and phones running API 27 and 28. Currently the device only runs in English and portrait orientation.
 
-* Who would find this app useful or fun, and when would they use it?
+## Third-Party Libraries
 
-  The app will be for users who are drinking adult beverages and will prevent them from sending unwanted/bad decision texts and calls. This app would ask a preliminary set of questions to measure the ‘sober’ math abilities of the user. This app would be usable for users with basic math skills as well as mathematicians, engineers and other users with a strong math background. (Note: I have found an app that already does something similar but only asks simple arithmetic questions and doesn’t block access to the phone’s calculator.)
+Drinking problems uses MathView,  a third-party view library which displays math formulas on Android apps. Two rendering engines are  available: MathJax and KaTeX. Drinking Problems uses KaTeX. Support Android version 4.1 (Jelly Bean) and newer.
 
-* Could this app be useful on its own, with no connection to the internet?
+## External Services
 
-  Yes. The app could have a bank of questions stored on the device.
+Drinking Problems uses Google Sign In to log in.
 
-* What sort of data would this app use or share if it had a connection to the internet? 
+## Aesthetic Improvements
 
-  Using location data the app could see if a user is at a bar/brewery. Also when connected to the internet it could pull from a larger bank of questions.
-I think I may have to create this bank of questions so that it will be formatted in a way that I can use, however some good sites are:
+The current design is very basic. The buttons could be styled differently, possibly in horrible neon flashing colors that would dissuade the user from trying to unlock the phone. Also some of the questions in the original database could not be used because there was not enough room on the screen in the current layout to display them properly (specifically multiple choice/answer questions that had fractional answers).
 
-[AP Calc Exam questions](https://apstudent.collegeboard.org/apcourse/ap-calculus-ab/exam-practice)
+## Stretch Goals
 
-[khan academy](https://www.khanacademy.org/math/calculus-all-old/ap-calc-topic)
 
-[PE Exam questions](http://www.peexamquestions.com/fe-exam-problems-1/)
+*Setting a timer, so that if the user doesn’t answer the question in a set amount of time the screen will lock, as if the question was answered incorrectly.
 
-* Write at least 2 user stories.
+*Adding other options for calling a cab such as Lyft or a search for nearby local taxi companies.
 
-1. As a user with strong math skills and an affinity for adult beverages, I want an app that will lock me out of my phone to prevent me from sending unwanted drunk texts or drunk dials.
-   - I want to always have the option to make certain calls if my phone is locked for example 911, cab company (or access to Uber/Lyft...) and possibly certain contacts like best friend, spouse etc.
-2. As a user (with or without strong math skills) I want to be able to lock myself out of my phone so that I won't get distracted from a task/working on a project/studing etc. 
-   - I want it to be inconvient to unlock my phone, but not impossible.
-   - I want the ability to additionaly turn my phone's do not disturb preferences on or off so that I can or can't see notifications from texts/calls/social media etc.
+*Adding another attribute to the questions, labeling them as easy, medium, or difficult.
+
+*On installation, the app would ask a preliminary set of questions to measure the ‘sober’ math abilities of the user. And then store the prefered list of questions to easy, medium or difficult.
+
+*Add the option to use the user’s location. Then the app could “remember” locations where it has been turned on before.
+
+* Add the option of using the app with an alarm, so that the user can’t silence an alarm without unlocking the screen through the app.
+
+## Relevant Links
+
+[my wireframe](AndroidProject.pdf)
+
+[User Stories](UserStories.md)
+
+[ERD](DrinkingProbsERD.pdf)
+
+[DDL](drinking_problems.ddl)
+
+[Javadoc](file:///C:/Users/Becca/Desktop/bootcamp/Projects/DrinkingProblems/docs/api/index.html)
+
+[Licenses]
+
+[Instructions for building Drinking Problems]
+
+[Instructions for using Drinking Problems]
+
+ 
+
 

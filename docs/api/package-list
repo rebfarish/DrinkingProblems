@@ -1,0 +1,7 @@
+com.enenby.drinkingproblems
+com.enenby.drinkingproblems.controller
+com.enenby.drinkingproblems.model.dao
+com.enenby.drinkingproblems.model.db
+com.enenby.drinkingproblems.model.entity
+com.enenby.drinkingproblems.model.pojo
+com.enenby.drinkingproblems.service

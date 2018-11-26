@@ -11,7 +11,7 @@ There are a few elements that need to be corrected for a usable prototype. First
 
 ## API Versions and Hardware
 
-The minimum required Android API is 21. It has been successfully tested on emulators and phones running API 27 and 28. Currently the device only runs in English and portrait orientation.
+The minimum required Android API is 21. It has been successfully tested on emulators and phones running API 27 and 28. Currently the app only runs in English and portrait orientation.
 
 ## Third-Party Libraries
 
@@ -28,15 +28,15 @@ The current design is very basic. The buttons could be styled differently, possi
 ## Stretch Goals
 
 
-*Setting a timer, so that if the user doesn’t answer the question in a set amount of time the screen will lock, as if the question was answered incorrectly.
+* Setting a timer, so that if the user doesn’t answer the question in a set amount of time the screen will lock, as if the question was answered incorrectly.
 
-*Adding other options for calling a cab such as Lyft or a search for nearby local taxi companies.
+* Adding other options for calling a cab such as Lyft or a search for nearby local taxi companies.
 
-*Adding another attribute to the questions, labeling them as easy, medium, or difficult.
+* Adding another attribute to the questions, labeling them as easy, medium, or difficult.
 
-*On installation, the app would ask a preliminary set of questions to measure the ‘sober’ math abilities of the user. And then store the prefered list of questions to easy, medium or difficult.
+* On installation, the app would ask a preliminary set of questions to measure the ‘sober’ math abilities of the user. And then store the prefered list of questions to easy, medium or difficult.
 
-*Add the option to use the user’s location. Then the app could “remember” locations where it has been turned on before.
+* Add the option to use the user’s location. Then the app could “remember” locations where it has been turned on before.
 
 * Add the option of using the app with an alarm, so that the user can’t silence an alarm without unlocking the screen through the app.
 
@@ -50,7 +50,7 @@ The current design is very basic. The buttons could be styled differently, possi
 
 [DDL](drinking_problems.ddl)
 
-[Javadoc](file:///C:/Users/Becca/Desktop/bootcamp/Projects/DrinkingProblems/docs/api/index.html)
+[Javadoc](/docs/api/index.html)
 
 [Licenses]
 

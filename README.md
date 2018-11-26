@@ -5,9 +5,9 @@ Drinking Problems is an Android app for users who are drinking adult beverages. 
 
 ## Current State of Completion
 
-When opened, the app will load a randomly selected question from the database. If the user answers the question correctly, the app will close. If answered incorrectly, the app will lock the screen for a set amount of time (currently this is set to one minute).
+When opened, the app will load a randomly selected question from the database. If the user answers the question correctly, the app will close. If answered incorrectly, the app will lock the screen for a set amount of time (currently this is set to ten seconds).
 
-There are a few elements that need to be corrected for a usable prototype. Firstly, if the user swipes up from the bottom of the screen the navigation bar will appear, allowing the user to simply back out of the app without answering a question. Secondly, the app has a limited bank of questions to pull from. After some time with the app a user could simply have the answers memorized. Lastly, the menu options don’t do much. This fragment needs to be more fleshed out.
+There are a few elements that need to be corrected for a usable prototype. Firstly, if the user swipes up from the bottom of the screen the navigation bar will appear, allowing the user to simply back out of the app without answering a question. Secondly, the app has a limited bank of questions to pull from. After some time with the app a user could simply have the answers memorized. 
 
 ## API Versions and Hardware
 
@@ -23,14 +23,12 @@ Drinking Problems uses Google Sign In to log in.
 
 ## Aesthetic Improvements
 
-The current design is very basic. The buttons could be styled differently, possibly in horrible neon flashing colors that would dissuade the user from trying to unlock the phone. Also some of the questions in the original database could not be used because there was not enough room on the screen in the current layout to display them properly (specifically multiple choice/answer questions that had fractional answers).
+The current design is very basic. The buttons could be styled differently, possibly in horrible neon flashing colors that would dissuade the user from trying to unlock the phone. The menu fragment also has a very basic design that could be reworked. Also a splash page when opening the app would be nice.
 
 ## Stretch Goals
 
 
 * Setting a timer, so that if the user doesn’t answer the question in a set amount of time the screen will lock, as if the question was answered incorrectly.
-
-* Adding other options for calling a cab such as Lyft or a search for nearby local taxi companies.
 
 * Adding another attribute to the questions, labeling them as easy, medium, or difficult.
 

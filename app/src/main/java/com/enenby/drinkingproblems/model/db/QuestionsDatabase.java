@@ -27,10 +27,10 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 
 
   /**
-   * Gets instance.
+   * Gets instance of the database.
    *
-   * @param context the context
-   * @return the instance
+   * @param context
+   * @return the instance of the database
    */
   public synchronized static QuestionsDatabase getInstance(Context context) {
     if (instance == null) {
@@ -42,9 +42,9 @@ public abstract class QuestionsDatabase extends RoomDatabase {
   }
 
   /**
-   * Forget instance.
+   * Forgets instance of the database.
    *
-   * @param context the context
+   * @param context
    */
   public synchronized static void forgetInstance(Context context) {
     instance = null;
@@ -66,9 +66,9 @@ public abstract class QuestionsDatabase extends RoomDatabase {
   public abstract QuestionDao getQuestionDao();
 
   /**
-   * Populate questions.
+   * Populates questions with answers to the database.
    *
-   * @param context the context
+   * @param context
    */
   public static void populateQuestions(Context context) {
       QuestionsDatabase db = getInstance(context);
@@ -106,7 +106,7 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         Answer answer2 = new Answer();
         Answer answer3 = new Answer();
 
-        question.setText("What is $$\\lim_{x\\to 0}\\frac{\\sinx}{x}$$?");
+        question.setText("What is $$\\lim_{x\\to 0} \\frac{\\sin x}{x}?$$");
         question.setType(Question.MULTI_CHOICE);
         question.setRandomAnswer(true);
         long questionId = qDao.insert(question);
@@ -166,11 +166,11 @@ public abstract class QuestionsDatabase extends RoomDatabase {
 
         answer1.setQuestionId(questionId);
         answer1.setText("$$0,-1$$");
-        answer1.setCorrect(true);
+        answer1.setCorrect(false);
 
         answer2.setQuestionId(questionId);
         answer2.setText("$$0,1$$");
-        answer2.setCorrect(false);
+        answer2.setCorrect(true);
 
         answer3.setQuestionId(questionId);
         answer3.setText("$$-1,1$$");
@@ -179,59 +179,242 @@ public abstract class QuestionsDatabase extends RoomDatabase {
         aDao.insert(answer1, answer2, answer3);
       }
 
-//      {
-//        Question question = new Question();
-//        Answer answer1 = new Answer();
-//        Answer answer2 = new Answer();
-//
-//        question.setText("$$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$");
-//        question.setType(Question.TRUE_FALSE);
-//        question.setRandomAnswer(true);
-//        long questionId = qDao.insert(question);
-//
-//        answer1.setQuestionId(questionId);
-//        answer1.setText("True");
-//        answer1.setCorrect(true);
-//
-//        answer2.setQuestionId(questionId);
-//        answer2.setText("False");
-//        answer2.setCorrect(false);
-//
-//        aDao.insert(answer1, answer2);
-//      }
-//
-//
-//      {
-//        Question question = new Question();
-//        Answer answer1 = new Answer();
-//        Answer answer2 = new Answer();
-//        Answer answer3 = new Answer();
-//        Answer answer4 = new Answer();
-//
-//        question.setText("If $$f(x)=3x+2,$$ then $$f^-1(x)=$$");
-//        question.setType(Question.MULTI_ANS);
-//        question.setRandomAnswer(false);
-//        long questionId = qDao.insert(question);
-//
-//        answer1.setQuestionId(questionId);
-//        answer1.setText("$$\\frac{x-2}{3}$$");
-//        answer1.setCorrect(true);
-//
-//        answer2.setQuestionId(questionId);
-//        answer2.setText("$$\\frac{1}{3x+2}$$");
-//        answer2.setCorrect(false);
-//
-//        answer3.setQuestionId(questionId);
-//        answer3.setText("$$\\frac x3 -2$$");
-//        answer3.setCorrect(false);
-//
-//        answer4.setQuestionId(questionId);
-//        answer4.setText("$$None of the Above$$");
-//        answer4.setCorrect(false);
-//
-//        aDao.insert(answer1, answer2, answer3, answer4);
-//
-//      }
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+
+      question.setText("$$\\frac{\\theta}{d\\theta} \\cos^{3}\\theta =$$");
+      question.setType(Question.MULTI_CHOICE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$-3\\sin\\theta\\cos^{2}\\theta$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$-3\\sin^{2}\\theta\\cos^{2}\\theta $$");
+      answer2.setCorrect(false);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$-3\\sin\\cos^{2}\\theta$$");
+      answer3.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3);
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+
+      question.setText("If $$f(x)=3x+2,$$ then $$f^-1(x)=$$");
+      question.setType(Question.MULTI_CHOICE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$\\frac{x-2}{3}$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$\\frac{1}{3x+2}$$");
+      answer2.setCorrect(false);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$\\frac x3 -2$$");
+      answer3.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3);
+
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+
+      question.setText("$${Re}(e^{ix}) = \\frac{e^{ix}+e^{-ix}}{2}=$$");
+      question.setType(Question.MULTI_CHOICE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$\\cos x$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$\\sin x$$");
+      answer2.setCorrect(false);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$-\\cos x$$");
+      answer3.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3);
+
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+
+      question.setText("$$grad(f) = \\frac{\\partial f}{\\partial x} \\vec{v}_x + "
+          + "\\frac{\\partial f}{\\partial y} \\vec{v}_y + "
+          + "\\frac{\\partial f}{\\partial z} \\vec{v}_z =$$");
+      question.setType(Question.MULTI_CHOICE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$\\nabla f$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$\\nabla \\cdot f$$");
+      answer2.setCorrect(false);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$\\nabla \\cdot \\vec{v}$$");
+      answer3.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3);
+
+    }
+
+    {
+        Question question = new Question();
+        Answer answer1 = new Answer();
+        Answer answer2 = new Answer();
+
+        question.setText("$$\\sum_{i=0}^n i^2 = \\frac{(n^2+n)(2n+1)}{6}$$");
+        question.setType(Question.TRUE_FALSE);
+        question.setRandomAnswer(true);
+        long questionId = qDao.insert(question);
+
+        answer1.setQuestionId(questionId);
+        answer1.setText("True");
+        answer1.setCorrect(true);
+
+        answer2.setQuestionId(questionId);
+        answer2.setText("False");
+        answer2.setCorrect(false);
+
+        aDao.insert(answer1, answer2);
+      }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+
+      question.setText("The divergence of a vector field$$\\vec{v}(x,y,z)$$ is a scalar "
+          + "function that can be represented as:$$\\nabla \\cdot \\vec{v}$$");
+      question.setType(Question.TRUE_FALSE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("True");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("False");
+      answer2.setCorrect(false);
+
+      aDao.insert(answer1, answer2);
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+
+      question.setText("$$\\lim_{x\\to 0} \\frac 1x$$ does not exist.");
+      question.setType(Question.TRUE_FALSE);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("True");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("False");
+      answer2.setCorrect(false);
+
+      aDao.insert(answer1, answer2);
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+      Answer answer4 = new Answer();
+
+      question.setText("$$\\frac{d}{dx}\\tan (x) =$$");
+      question.setType(Question.MULTI_ANS);
+      question.setRandomAnswer(false);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$\\sec^{2} (x)$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$\\sec (x)$$");
+      answer2.setCorrect(false);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$\\tan^{2} (x)+1$$");
+      answer3.setCorrect(true);
+
+      answer4.setQuestionId(questionId);
+      answer4.setText("$$None Of The Above.$$");
+      answer4.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3, answer4);
+
+    }
+
+    {
+      Question question = new Question();
+      Answer answer1 = new Answer();
+      Answer answer2 = new Answer();
+      Answer answer3 = new Answer();
+      Answer answer4 = new Answer();
+
+      question.setText("The complex conjugate $$\\bar{z}$$ can also be written as:");
+      question.setType(Question.MULTI_ANS);
+      question.setRandomAnswer(true);
+      long questionId = qDao.insert(question);
+
+      answer1.setQuestionId(questionId);
+      answer1.setText("$$x - iy$$");
+      answer1.setCorrect(true);
+
+      answer2.setQuestionId(questionId);
+      answer2.setText("$$re^{-i\\varphi}$$");
+      answer2.setCorrect(true);
+
+      answer3.setQuestionId(questionId);
+      answer3.setText("$$|z|(\\cos \\varphi - i\\sin \\varphi)$$");
+      answer3.setCorrect(true);
+
+      answer4.setQuestionId(questionId);
+      answer4.setText("$$re^{i\\varphi}$$");
+      answer4.setCorrect(false);
+
+      aDao.insert(answer1, answer2, answer3, answer4);
+
+    }
       forgetInstance(context);
     }
 }

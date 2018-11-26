@@ -22,7 +22,7 @@ import io.github.kexanie.library.MathView;
 import java.util.Collections;
 
 /**
- * The type True false fragment.
+ * This fragment displays a true/false question.
  */
 public class TrueFalseFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
@@ -31,14 +31,11 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
-  private int correct;
-  private View v;
 
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
   }
-
 
 
   @Override
@@ -114,7 +111,5 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
       return QuestionsDatabase.getInstance(getActivity()).getQuestionDao().selectById(id[0]);
     }
   }
-
-
 
 }

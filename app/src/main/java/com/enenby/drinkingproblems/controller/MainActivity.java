@@ -29,19 +29,17 @@ import java.util.List;
 
 
 /**
- * The type Main activity.
+ * MainActivity loads questions from the database and loads a matching fragment to display it.
  */
 public class MainActivity extends AppCompatActivity implements QuestionsFragment.QuestionLoader {
 
 
+//  public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
+
   /**
-   * The constant QUESTION_AND_ANSWER.
+   * The constant QUESTION_ID is the primary key of the question table. Uniquely identifies each question.
    */
-  public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
-  /**
-   * The constant QUESTION_ID.
-   */
-  public static final String QUESTION_ID = "QuestionId";
+  protected static final String QUESTION_ID = "QuestionId";
   private TextView questionText;
   private int correct;
   private Toolbar topToolbar;
@@ -49,10 +47,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   private QuestionsDatabase database;
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
-  /**
-   * The constant RESULT_ENABLE.
-   */
-  public static final int RESULT_ENABLE = 11;
+  private static final int RESULT_ENABLE = 11;
   private static long lastLockedTime = 0;
 
 
@@ -176,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
 
   /**
-   * The type Query task.
+   * Query task that loads correct fragment depending on question type.
    */
   class QueryTask extends AsyncTask<Void, Void, Question> {
 
@@ -216,29 +211,39 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     new QueryTask().execute();
   }
 
-public void saveToSharedPrefs(int tally){
+  /**
+   * Saves a tally of incorrectly answered questions to shared prefs.
+   *
+   * @param tally the tally of incorrectly answered questions
+   */
+  public void saveToSharedPrefs(int tally){
   SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
   SharedPreferences.Editor editor = sharedPreferences.edit();
   editor.putInt(getString(R.string.string_key),tally);
   editor.apply();
 }
 
-public int getFromSharedPrefs(){
+  /**
+   * Gets the saved tally from shared prefs.
+   *
+   * @return tally int
+   */
+  public int getFromSharedPrefs(){
     SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
     return sharedPreferences.getInt(getString(R.string.string_key), 0);
 }
 
   /**
-   * Get last locked time long.
+   * Gets last locked time.
    *
-   * @return the long
+   * @return locked time long
    */
   public static long getLastLockedTime(){
     return lastLockedTime;
   }
 
   /**
-   * Reset last locked time.
+   * Resets the last locked time.
    */
   public static void resetLastLockedTime(){
     lastLockedTime = System.currentTimeMillis();

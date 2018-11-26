@@ -18,8 +18,8 @@ public interface QuestionDao {
   /**
    * Insert long.
    *
-   * @param question the question
-   * @return the long
+   * @param question
+   * @return the question
    */
   @Insert(onConflict = OnConflictStrategy.FAIL)
   long insert (Question question);
@@ -27,14 +27,14 @@ public interface QuestionDao {
   /**
    * Select list.
    *
-   * @return the list
+   * @return the list of questions ordered by type of question
    */
   @Query("SELECT * FROM Question ORDER BY type")
   List<Question> select();
 
 
   /**
-   * Select random with answers question.
+   * Select random question with answers.
    *
    * @return the question
    */
@@ -44,7 +44,7 @@ public interface QuestionDao {
   /**
    * Select by id question and answers.
    *
-   * @param questionId the question id
+   * @param questionId
    * @return the question and answers
    */
   @Transaction

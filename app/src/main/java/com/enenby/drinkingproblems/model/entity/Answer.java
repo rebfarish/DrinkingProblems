@@ -6,7 +6,7 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
- * The type Answer.
+ * The Answer Entity. Its primary key is the answer id and its foreign key is the question id.
  */
 @Entity(
     foreignKeys = @ForeignKey(entity = Question.class, parentColumns = "question_id",
@@ -26,18 +26,18 @@ public class Answer {
   private boolean correct;
 
   /**
-   * Gets id.
+   * Gets answer id.
    *
-   * @return the id
+   * @return answer id
    */
   public long getId() {
     return id;
   }
 
   /**
-   * Sets id.
+   * Sets answer id.
    *
-   * @param id the id
+   * @param id the answer id
    */
   public void setId(long id) {
     this.id = id;
@@ -62,18 +62,18 @@ public class Answer {
   }
 
   /**
-   * Gets text.
+   * Gets answer text.
    *
-   * @return the text
+   * @return the answer text
    */
   public String getText() {
     return text;
   }
 
   /**
-   * Sets text.
+   * Sets answer text.
    *
-   * @param text the text
+   * @param text the answer text
    */
   public void setText(String text) {
     this.text = text;
@@ -82,16 +82,16 @@ public class Answer {
   /**
    * Is correct boolean.
    *
-   * @return the boolean
+   * @return the boolean correct
    */
   public boolean isCorrect() {
     return correct;
   }
 
   /**
-   * Sets correct.
+   * Sets correct answer.
    *
-   * @param correct the correct
+   * @param correct the correct answer
    */
   public void setCorrect(boolean correct) {
     this.correct = correct;

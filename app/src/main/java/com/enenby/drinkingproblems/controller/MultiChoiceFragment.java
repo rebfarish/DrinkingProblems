@@ -21,7 +21,7 @@ import java.util.Collections;
 
 
 /**
- * The type Multi choice fragment.
+ * This fragment displays a multiple choice question.
  */
 public class MultiChoiceFragment extends QuestionsFragment implements RadioButton.OnClickListener {
 
@@ -32,12 +32,6 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
   private TextView cabButton;
   private TextView emergencyButton;
   private MathView questionTextView;
-  private int correct;
-  private View v;
-  /**
-   * The constant RESULT_ENABLE.
-   */
-  public static final int RESULT_ENABLE = 11;
 
 
   @Override
@@ -90,6 +84,7 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
     return v;
   }
 
+  @Override
   public void onClick(View view) {
     // Is the button now checked?
 

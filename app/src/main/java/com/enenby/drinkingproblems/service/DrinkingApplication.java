@@ -8,7 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 /**
- * The type Drinking application.
+ * Drinking application allows users to sign in to app with Google Sign-in.
  */
 public class DrinkingApplication extends Application {
 
@@ -42,7 +42,7 @@ public class DrinkingApplication extends Application {
   }
 
   /**
-   * Gets client.
+   * Gets Google Sign In client.
    *
    * @return the client
    */
@@ -51,27 +51,27 @@ public class DrinkingApplication extends Application {
   }
 
   /**
-   * Sets client.
+   * Sets Google Sign in client.
    *
-   * @param client the client
+   * @param client
    */
   public void setClient(GoogleSignInClient client) {
     this.client = client;
   }
 
   /**
-   * Gets account.
+   * Gets Google Sign In account.
    *
-   * @return the account
+   * @return the Google Sign In account
    */
   public GoogleSignInAccount getAccount() {
     return account;
   }
 
   /**
-   * Sets account.
+   * Sets Google Sign In account.
    *
-   * @param account the account
+   * @param account the Google Sign In account
    */
   public void setAccount(GoogleSignInAccount account) {
     this.account = account;

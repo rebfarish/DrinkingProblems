@@ -7,21 +7,21 @@ import android.arch.persistence.room.PrimaryKey;
 
 
 /**
- * The type Question.
+ * The Question Entity. Its primary key is question id.
  */
 @Entity
 public class Question {
 
   /**
-   * The constant MULTI_CHOICE.
+   * The constant 0 flags question as MULTI_CHOICE question.
    */
   public static final int MULTI_CHOICE = 0;
   /**
-   * The constant MULTI_ANS.
+   * The constant 1 flags question as MULTI_ANS question.
    */
   public static final int MULTI_ANS = 1;
   /**
-   * The constant TRUE_FALSE.
+   * The constant 2 flags question as TRUE_FALSE question.
    */
   public static final int TRUE_FALSE = 2;
 
@@ -43,52 +43,52 @@ private int type;
 }
 
   /**
-   * Gets id.
+   * Gets question id.
    *
-   * @return the id
+   * @return the question id
    */
   public long getId() {
     return id;
   }
 
   /**
-   * Sets id.
+   * Sets question id.
    *
-   * @param id the id
+   * @param id the question id
    */
   public void setId(long id) {
     this.id = id;
   }
 
   /**
-   * Gets text.
+   * Gets question text.
    *
-   * @return the text
+   * @return the question text
    */
   public String getText() {
     return text;
   }
 
   /**
-   * Sets text.
+   * Sets question text.
    *
-   * @param text the text
+   * @param text the question text
    */
   public void setText(String text) {
     this.text = text;
   }
 
   /**
-   * Is random answer boolean.
+   * Is random answer randomizes answer order if true.
    *
-   * @return the boolean
+   * @return the boolean true if answers are randomized.
    */
   public boolean isRandomAnswer() {
     return randomAnswer;
   }
 
   /**
-   * Sets random answer.
+   * Sets random answer order.
    *
    * @param randomAnswer the random answer
    */
@@ -97,18 +97,18 @@ private int type;
   }
 
   /**
-   * Gets type.
+   * Gets question type.
    *
-   * @return the type
+   * @return the question type
    */
   public int getType() {
     return type;
   }
 
   /**
-   * Sets type.
+   * Sets question type.
    *
-   * @param type the type
+   * @param type the question type
    */
   public void setType(int type) {
     this.type = type;

@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 /**
- * The type Options menu.
+ * This fracment displays the Options menu.
  */
 public class OptionsMenu extends Fragment {
 
@@ -34,12 +34,12 @@ public class OptionsMenu extends Fragment {
     //Inflate the layout for this fragment
     View v = inflater.inflate(R.layout.fragment_options_menu, container, false);
 
-   general  = (TextView) v.findViewById(R.id.general_settings);
-   uber = (TextView) v.findViewById(R.id.uber);
-   lyft = (TextView) v.findViewById(R.id.lyft);
-   geoTaxi = (TextView) v.findViewById(R.id.geo_taxi);
-   help = (TextView) v.findViewById(R.id.help);
-   emergency = (TextView) v.findViewById(R.id.emergency_button);
+   general  = v.findViewById(R.id.general_settings);
+   uber = v.findViewById(R.id.uber);
+   lyft = v.findViewById(R.id.lyft);
+   geoTaxi = v.findViewById(R.id.geo_taxi);
+   help = v.findViewById(R.id.help);
+   emergency = v.findViewById(R.id.emergency_button);
 
 
    //TODO wire up the buttons

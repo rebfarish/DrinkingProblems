@@ -16,8 +16,8 @@ public interface AnswerDao {
   /**
    * Insert list.
    *
-   * @param answers the answers
-   * @return the list
+   * @param answers
+   * @return the list of answers
    */
   @Insert (onConflict = OnConflictStrategy.FAIL)
   List<Long> insert(Answer... answers);
@@ -25,8 +25,8 @@ public interface AnswerDao {
   /**
    * Select list.
    *
-   * @param questionId the question id
-   * @return the list
+   * @param questionId
+   * @return the list of question ids
    */
   @Query("SELECT * FROM Answer WHERE question_id = :questionId ORDER BY answer_id")
   List<Answer> select(long questionId);

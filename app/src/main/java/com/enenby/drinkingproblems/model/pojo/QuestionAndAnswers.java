@@ -7,7 +7,7 @@ import com.enenby.drinkingproblems.model.entity.Question;
 import java.util.List;
 
 /**
- * The type Question and answers.
+ * Question and answers is a POJO that links questions with their possible answers.
  */
 public class QuestionAndAnswers {
 

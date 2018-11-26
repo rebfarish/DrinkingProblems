@@ -14,7 +14,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 /**
- * The type Login activity.
+ * Uses Google Sign-In to allow users to login to application.
  */
 public class LoginActivity extends AppCompatActivity {
 

@@ -11,29 +11,33 @@ import android.support.v4.app.Fragment;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 
 /**
- * The type Questions fragment.
+ * Controller for question fragments.
  */
 public abstract class QuestionsFragment extends Fragment {
 
- public static int incorrect = 0;
+
   /**
-   * The Question and answers.
+   * The constant incorrect is number of incorrectly answered questions.
+   */
+  public static int incorrect = 0;
+  /**
+   * The Question and answers POJO gets a question and possible answers for that question.
    */
   protected QuestionAndAnswers questionAndAnswers;
   /**
-   * The constant devicePolicyManager.
+   * devicePolicyManager manages policies enforced.
    */
   protected static DevicePolicyManager devicePolicyManager;
   /**
-   * The Comp name.
+   * compName is the identifier for the BroadcastReceiver PhoneUnlockedReceiver.
    */
   protected ComponentName compName;
 
 
   /**
-   * Handle answer.
+   * Takes in boolean isCorrect. If correct closes app, if incorrect locks screen.
    *
-   * @param isCorrect the is correct
+   * @param isCorrect boolean true for correct answer, false for incorrect.
    */
   public void handleAnswer(boolean isCorrect){
     if(isCorrect){
@@ -52,9 +56,9 @@ public abstract class QuestionsFragment extends Fragment {
   }
 
   /**
-   * Check answer.
+   * Checks if answer is correct then passes to handleAnswer.
    *
-   * @param i the
+   * @param i answer selected.
    */
   protected void checkAnswer(int i){
     if (questionAndAnswers.getAnswers().get(i).isCorrect()) {
@@ -67,7 +71,7 @@ public abstract class QuestionsFragment extends Fragment {
 
 
   /**
-   * Call cab.
+   * Will load Uber app if installed, if not will open link to app store to install it.
    */
   protected void callCab(){
     //TODO check if phone has Uber installed, give other cab options
@@ -81,7 +85,7 @@ public abstract class QuestionsFragment extends Fragment {
   }
 
   /**
-   * Emergency.
+   * Opens dialer with 911 dialed.
    */
   protected void emergency(){
     Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -91,7 +95,7 @@ public abstract class QuestionsFragment extends Fragment {
 
 
   /**
-   * The type Phone unlocked receiver.
+   * Reciever that locks screen when password is correctly entered.
    */
   public static class PhoneUnlockedReceiver extends BroadcastReceiver {
 
@@ -103,7 +107,7 @@ public abstract class QuestionsFragment extends Fragment {
       if (keyguardManager.isKeyguardSecure()) {
         long now = System.currentTimeMillis();
 
-        if(now - MainActivity.getLastLockedTime()<60000){
+        if(now - MainActivity.getLastLockedTime()<10000){
           devicePolicyManager.lockNow();
         }
 
@@ -113,12 +117,12 @@ public abstract class QuestionsFragment extends Fragment {
   }
 
   /**
-   * The interface Question loader.
+   * The interface Question loader loads the next question.
    */
   interface QuestionLoader{
 
     /**
-     * Reload question.
+     * Reload question loads the next question.
      */
     void reloadQuestion();
   }

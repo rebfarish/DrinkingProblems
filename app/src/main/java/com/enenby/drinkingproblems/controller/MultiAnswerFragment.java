@@ -19,7 +19,6 @@ import com.enenby.drinkingproblems.model.db.QuestionsDatabase;
 import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
 import io.github.kexanie.library.MathView;
 import java.util.Collections;
-//try adding another card view putting in relative layout with checkboxes and putting latex on card
 
 /**
  * This fragment displays a multiple answer question.
@@ -108,6 +107,7 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     return v;
   }
 
+  @Override
   public void onClick(View view){
     //Is the checkbox checked?
 

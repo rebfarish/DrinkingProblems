@@ -107,6 +107,7 @@ public abstract class QuestionsFragment extends Fragment {
       if (keyguardManager.isKeyguardSecure()) {
         long now = System.currentTimeMillis();
 
+        //Sets the duration of time that the screen will be locked.
         if(now - MainActivity.getLastLockedTime()<10000){
           devicePolicyManager.lockNow();
         }

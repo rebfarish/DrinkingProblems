@@ -73,9 +73,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     switch (requestCode) {
       case RESULT_ENABLE:
         if (resultCode == Activity.RESULT_OK) {
-          Toast.makeText(MainActivity.this,
-              R.string.enable_admin,
-              Toast.LENGTH_LONG).show();
+          //do nothing
         } else {
           Toast.makeText(MainActivity.this,
               R.string.cannot_enable_admin,
@@ -127,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
             | View.SYSTEM_UI_FLAG_FULLSCREEN);
     String strIncorrect = getResources().getString(R.string.incorrect_toast,
         getFromSharedPrefs());
-    Toast.makeText(MainActivity.this, strIncorrect, Toast.LENGTH_LONG).show();
+    Toast.makeText(MainActivity.this, strIncorrect, Toast.LENGTH_SHORT).show();
 
   }
 

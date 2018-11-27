@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-    if (account != null){
+    if (account != null) {
       DrinkingApplication.getInstance().setAccount(account);
       switchToMain();
     }
@@ -40,26 +40,26 @@ public class LoginActivity extends AppCompatActivity {
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    if(requestCode == REQUEST_CODE){
+    if (requestCode == REQUEST_CODE) {
       try {
         Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
         GoogleSignInAccount account = task.getResult(ApiException.class);
         DrinkingApplication.getInstance().setAccount(account);
         switchToMain();
       } catch (ApiException e) {
-        Toast.makeText(this, R.string.sign_in_error,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.sign_in_error, Toast.LENGTH_LONG).show();
       }
     }
   }
 
 
-    private void signIn(){
-      Intent intent = DrinkingApplication.getInstance().getClient().getSignInIntent();
-      startActivityForResult(intent,REQUEST_CODE);
-    }
+  private void signIn() {
+    Intent intent = DrinkingApplication.getInstance().getClient().getSignInIntent();
+    startActivityForResult(intent, REQUEST_CODE);
+  }
 
 
-  private void switchToMain(){
+  private void switchToMain() {
     Intent intent = new Intent(this, MainActivity.class);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(intent);

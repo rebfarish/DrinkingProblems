@@ -42,7 +42,7 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-//    hideSystemUI();
+
     View v = inflater.inflate(R.layout.fragment_multi_choice, container, false);
     optionAButton = v.findViewById(R.id.option_a_button);
     optionBButton = v.findViewById(R.id.option_b_button);
@@ -86,60 +86,48 @@ public class MultiChoiceFragment extends QuestionsFragment implements RadioButto
 
   @Override
   public void onClick(View view) {
-    // Is the button now checked?
-
-    // Check which radio button was clicked
     switch (view.getId()) {
       case R.id.option_a_button:
-
         checkAnswer(0);
-
         break;
       case R.id.option_b_button:
-
         checkAnswer(1);
-
         break;
       case R.id.option_c_button:
-
         checkAnswer(2);
-
         break;
-
       case R.id.cab_button:
         callCab();
         break;
-
       case R.id.emergency_button:
         emergency();
         break;
     }
-    }
-
-
-
-    private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
-
-      @Override
-      protected void onPostExecute(QuestionAndAnswers questionAndAnswers) {
-        super.onPostExecute(questionAndAnswers);
-        if (questionAndAnswers.getQuestion().isRandomAnswer()) {
-          Collections.shuffle(questionAndAnswers.getAnswers());
-        }
-        optionAButton.setText(questionAndAnswers.getAnswers().get(0).getText());
-        optionBButton.setText(questionAndAnswers.getAnswers().get(1).getText());
-        optionCButton.setText(questionAndAnswers.getAnswers().get(2).getText());
-        questionTextView.setText(questionAndAnswers.getQuestion().getText());
-
-        MultiChoiceFragment.this.questionAndAnswers = questionAndAnswers;
-      }
-
-      @Override
-      protected QuestionAndAnswers doInBackground(Long... id) {
-        return QuestionsDatabase.getInstance(getActivity()).getQuestionDao().selectById(id[0]);
-      }
-    }
-
   }
+
+
+  private class QuestionAndAnswersTask extends AsyncTask<Long, Void, QuestionAndAnswers> {
+
+    @Override
+    protected void onPostExecute(QuestionAndAnswers questionAndAnswers) {
+      super.onPostExecute(questionAndAnswers);
+      if (questionAndAnswers.getQuestion().isRandomAnswer()) {
+        Collections.shuffle(questionAndAnswers.getAnswers());
+      }
+      optionAButton.setText(questionAndAnswers.getAnswers().get(0).getText());
+      optionBButton.setText(questionAndAnswers.getAnswers().get(1).getText());
+      optionCButton.setText(questionAndAnswers.getAnswers().get(2).getText());
+      questionTextView.setText(questionAndAnswers.getQuestion().getText());
+
+      MultiChoiceFragment.this.questionAndAnswers = questionAndAnswers;
+    }
+
+    @Override
+    protected QuestionAndAnswers doInBackground(Long... id) {
+      return QuestionsDatabase.getInstance(getActivity()).getQuestionDao().selectById(id[0]);
+    }
+  }
+
+}
 
 

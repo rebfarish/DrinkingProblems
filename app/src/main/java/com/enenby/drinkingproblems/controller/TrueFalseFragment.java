@@ -41,8 +41,7 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-//    hideSystemUI();
+
     View v = inflater.inflate(R.layout.fragment_true_false, container, false);
     trueButton = v.findViewById(R.id.true_button);
     falseButton = v.findViewById(R.id.false_button);
@@ -60,15 +59,12 @@ public class TrueFalseFragment extends QuestionsFragment implements RadioButton.
 
     Bundle bundle = getArguments();
     new QuestionAndAnswersTask().execute(bundle.getLong(QUESTION_ID));
-
     return v;
   }
 
   @Override
   public void onClick(View view) {
-    //is the button now checked?
     boolean checked = ((RadioButton) view).isChecked();
-    // Check which radio button was clicked
     switch (view.getId()) {
       case R.id.true_button:
         if (checked) {

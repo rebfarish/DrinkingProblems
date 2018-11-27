@@ -23,7 +23,7 @@ import java.util.Collections;
 /**
  * This fragment displays a multiple answer question.
  */
-public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.OnClickListener{
+public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.OnClickListener {
 
   private CheckBox checkboxA;
   private CheckBox checkboxB;
@@ -44,8 +44,6 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     super.onCreate(savedInstanceState);
 
   }
-
-
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,7 +94,6 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
       return true;
     });
 
-
     devicePolicyManager = (DevicePolicyManager) getActivity()
         .getSystemService(DEVICE_POLICY_SERVICE);
     compName = new ComponentName(getActivity(), ScreenLock.class);
@@ -108,13 +105,10 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
   }
 
   @Override
-  public void onClick(View view){
-    //Is the checkbox checked?
-
-    // Check which radio button was clicked
+  public void onClick(View view) {
     switch (view.getId()) {
       case R.id.checkbox_a_button:
-          checkboxA.setChecked(true);
+        checkboxA.setChecked(true);
         break;
       case R.id.checkbox_b_button:
         checkboxB.setChecked(true);
@@ -138,13 +132,13 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
     }
   }
 
-  private void checkAnswer (){
-    if(checkboxA.isChecked() == questionAndAnswers.getAnswers().get(0).isCorrect()&&
-    checkboxB.isChecked() == questionAndAnswers.getAnswers().get(1).isCorrect() &&
-    checkboxC.isChecked() == questionAndAnswers.getAnswers().get(2).isCorrect() &&
-    checkboxD.isChecked() == questionAndAnswers.getAnswers().get(3).isCorrect()){
+  private void checkAnswer() {
+    if (checkboxA.isChecked() == questionAndAnswers.getAnswers().get(0).isCorrect() &&
+        checkboxB.isChecked() == questionAndAnswers.getAnswers().get(1).isCorrect() &&
+        checkboxC.isChecked() == questionAndAnswers.getAnswers().get(2).isCorrect() &&
+        checkboxD.isChecked() == questionAndAnswers.getAnswers().get(3).isCorrect()) {
       handleAnswer(true);
-    }else{
+    } else {
       handleAnswer(false);
     }
   }
@@ -164,7 +158,7 @@ public class MultiAnswerFragment extends QuestionsFragment implements CheckBox.O
       mathButtonD.setText(questionAndAnswers.getAnswers().get(3).getText());
       questionTextView.setText(questionAndAnswers.getQuestion().getText());
 
-      MultiAnswerFragment.this.questionAndAnswers=questionAndAnswers;
+      MultiAnswerFragment.this.questionAndAnswers = questionAndAnswers;
     }
 
     @Override

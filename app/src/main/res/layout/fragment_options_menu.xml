@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
@@ -11,56 +13,69 @@
   <TextView
     style="?android:listSeparatorTextViewStyle"
     android:id="@+id/general_settings"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:paddingTop="24dp"
+    android:padding="@dimen/layout_padding"
+    android:layout_marginTop="@dimen/layout_padding"
     android:text="@string/general_settings"/>
 
     <TextView
       style="?android:listSeparatorTextViewStyle"
       android:id="@+id/uber"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:clickable="true"
       android:focusable="true"
+      android:padding="@dimen/layout_padding"
+      android:layout_marginTop="@dimen/layout_padding"
       android:text="@string/uber"/>
 
     <TextView
       style="?android:listSeparatorTextViewStyle"
       android:id="@+id/lyft"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:clickable="true"
       android:focusable="true"
+      android:padding="@dimen/layout_padding"
+      android:layout_marginTop="@dimen/layout_padding"
       android:text="@string/lyft"/>
 
     <TextView
       style="?android:listSeparatorTextViewStyle"
       android:id="@+id/geo_taxi"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:clickable="true"
       android:focusable="true"
+      android:padding="@dimen/layout_padding"
+      android:layout_marginTop="@dimen/layout_padding"
       android:text="@string/geo_taxi"/>
 
     <TextView
       style="?android:listSeparatorTextViewStyle"
       android:id="@+id/help"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:clickable="true"
       android:focusable="true"
+      android:padding="@dimen/layout_padding"
+      android:layout_marginTop="@dimen/layout_padding"
       android:text="@string/help"/>
 
-    <TextView
-      style="?android:listSeparatorTextViewStyle"
-      android:id="@+id/emergency_button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:clickable="true"
-      android:focusable="true"
-      android:text="@string/emergency_button"/>
+  <TextView
+    android:id="@+id/emergency_button"
+    style="?android:listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/layout_padding"
+    android:layout_marginTop="@dimen/layout_padding"
+    android:background="@color/colorAccent"
+    android:clickable="true"
+    android:focusable="true"
+    android:textAlignment="center"
+    android:text="@string/emergency_button"/>
 
 </LinearLayout>

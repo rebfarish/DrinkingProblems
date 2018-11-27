@@ -16,8 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.enenby.drinkingproblems.OptionsMenu;
 import com.enenby.drinkingproblems.R;
@@ -34,16 +32,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements QuestionsFragment.QuestionLoader {
 
 
-//  public static final String QUESTION_AND_ANSWER = "QuestionAndAnswer";
-
   /**
-   * The constant QUESTION_ID is the primary key of the question table. Uniquely identifies each question.
+   * The constant QUESTION_ID is the primary key of the question table. Uniquely identifies each
+   * question.
    */
   protected static final String QUESTION_ID = "QuestionId";
-  private TextView questionText;
-  private int correct;
   private Toolbar topToolbar;
-  private OnClickListener listener;
   private QuestionsDatabase database;
   private DevicePolicyManager devicePolicyManager;
   private ComponentName compName;
@@ -51,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   private static long lastLockedTime = 0;
 
 
-//TODO check to see if already signed in then just load fragment
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -59,13 +52,13 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
     devicePolicyManager = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
     compName = new ComponentName(this, ScreenLock.class);
-    registerReceiver(new PhoneUnlockedReceiver(), new IntentFilter("android.intent.action.USER_PRESENT"));
+    registerReceiver(new PhoneUnlockedReceiver(),
+        new IntentFilter("android.intent.action.USER_PRESENT"));
 
     topToolbar = findViewById(R.id.toolbar);
     setSupportActionBar(topToolbar);
 
     database = QuestionsDatabase.getInstance(this);
-
 
     Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
     intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, compName);
@@ -83,9 +76,6 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
           Toast.makeText(MainActivity.this,
               R.string.enable_admin,
               Toast.LENGTH_LONG).show();
-
-
-
         } else {
           Toast.makeText(MainActivity.this,
               R.string.cannot_enable_admin,
@@ -98,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    //Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.menu, menu);
     return true;
   }
@@ -114,12 +103,12 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
       FragmentManager fm = getSupportFragmentManager();
       Fragment fragmentOptions = new OptionsMenu();
 
-      fm.beginTransaction().add(R.id.fragment_container_options, fragmentOptions).commit();
+      fm.beginTransaction().replace(R.id.fragment_container_options, fragmentOptions)
+          .addToBackStack(null).commit();
 
     } else if (id == R.id.arrow_back) {
       Toast.makeText(MainActivity.this, R.string.back_button, Toast.LENGTH_LONG).show();
     }
-    //TODO make tool bar buttons navigate to where they should go
     return super.onOptionsItemSelected(item);
   }
 
@@ -137,8 +126,8 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             | View.SYSTEM_UI_FLAG_FULLSCREEN);
     String strIncorrect = getResources().getString(R.string.incorrect_toast,
-        QuestionsFragment.incorrect);
-    Toast.makeText(MainActivity.this, strIncorrect,Toast.LENGTH_LONG);
+        getFromSharedPrefs());
+    Toast.makeText(MainActivity.this, strIncorrect, Toast.LENGTH_LONG).show();
 
   }
 
@@ -149,6 +138,48 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     super.onStop();
   }
 
+  public void reloadQuestion() {
+    new QueryTask().execute();
+  }
+
+  /**
+   * Saves a tally of incorrectly answered questions to shared prefs.
+   *
+   * @param tally the tally of incorrectly answered questions
+   */
+  public void saveToSharedPrefs(int tally) {
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+    editor.putInt(getString(R.string.string_key), tally);
+    editor.apply();
+  }
+
+  /**
+   * Gets the saved tally from shared prefs.
+   *
+   * @return tally int
+   */
+  public int getFromSharedPrefs() {
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    return sharedPreferences.getInt(getString(R.string.string_key), 0);
+  }
+
+  /**
+   * Gets last locked time.
+   *
+   * @return locked time long
+   */
+  public static long getLastLockedTime() {
+    return lastLockedTime;
+  }
+
+  /**
+   * Resets the last locked time.
+   */
+  public static void resetLastLockedTime() {
+    lastLockedTime = System.currentTimeMillis();
+  }
+
 
   //initializes data base to fix null pointer exception on OnCreate
   private class InitializeDataBase extends AsyncTask<Void, Void, Void> {
@@ -157,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
     protected Void doInBackground(Void... voids) {
       List<Question> questions = QuestionsDatabase.getInstance(MainActivity.this)
           .getQuestionDao().select();
-      if (questions.size() == 0){
+      if (questions.size() == 0) {
         QuestionsDatabase.populateQuestions(MainActivity.this);
       }
       return null;
@@ -165,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        new QueryTask().execute();
+      new QueryTask().execute();
     }
   }
 
@@ -173,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
   /**
    * Query task that loads correct fragment depending on question type.
    */
-  class QueryTask extends AsyncTask<Void, Void, Question> {
+  public class QueryTask extends AsyncTask<Void, Void, Question> {
 
     @Override
     protected void onPostExecute(Question question) {
@@ -206,49 +237,6 @@ public class MainActivity extends AppCompatActivity implements QuestionsFragment
       return database.getQuestionDao().selectRandomWithAnswers();
     }
   }
-
-  public void reloadQuestion(){
-    new QueryTask().execute();
-  }
-
-  /**
-   * Saves a tally of incorrectly answered questions to shared prefs.
-   *
-   * @param tally the tally of incorrectly answered questions
-   */
-  public void saveToSharedPrefs(int tally){
-  SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-  SharedPreferences.Editor editor = sharedPreferences.edit();
-  editor.putInt(getString(R.string.string_key),tally);
-  editor.apply();
-}
-
-  /**
-   * Gets the saved tally from shared prefs.
-   *
-   * @return tally int
-   */
-  public int getFromSharedPrefs(){
-    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-    return sharedPreferences.getInt(getString(R.string.string_key), 0);
-}
-
-  /**
-   * Gets last locked time.
-   *
-   * @return locked time long
-   */
-  public static long getLastLockedTime(){
-    return lastLockedTime;
-  }
-
-  /**
-   * Resets the last locked time.
-   */
-  public static void resetLastLockedTime(){
-    lastLockedTime = System.currentTimeMillis();
-  }
-
 
 
 }

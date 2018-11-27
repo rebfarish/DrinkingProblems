@@ -32,7 +32,6 @@ public interface QuestionDao {
   @Query("SELECT * FROM Question ORDER BY type")
   List<Question> select();
 
-
   /**
    * Select random question with answers.
    *

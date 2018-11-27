@@ -15,11 +15,6 @@ import com.enenby.drinkingproblems.model.pojo.QuestionAndAnswers;
  */
 public abstract class QuestionsFragment extends Fragment {
 
-
-  /**
-   * The constant incorrect is number of incorrectly answered questions.
-   */
-  public static int incorrect = 0;
   /**
    * The Question and answers POJO gets a question and possible answers for that question.
    */
@@ -39,15 +34,15 @@ public abstract class QuestionsFragment extends Fragment {
    *
    * @param isCorrect boolean true for correct answer, false for incorrect.
    */
-  public void handleAnswer(boolean isCorrect){
-    if(isCorrect){
+  public void handleAnswer(boolean isCorrect) {
+    if (isCorrect) {
       getActivity().finish();
-    }else {
+    } else {
       boolean active = devicePolicyManager.isAdminActive(compName);
       if (active) {
         MainActivity.resetLastLockedTime();
         devicePolicyManager.lockNow();
-        incorrect = ((MainActivity) getActivity()).getFromSharedPrefs() +1;
+        int incorrect = ((MainActivity) getActivity()).getFromSharedPrefs() + 1;
         ((MainActivity) getActivity()).saveToSharedPrefs(incorrect);
         ((QuestionLoader) getActivity()).reloadQuestion();
 
@@ -60,10 +55,10 @@ public abstract class QuestionsFragment extends Fragment {
    *
    * @param i answer selected.
    */
-  protected void checkAnswer(int i){
+  protected void checkAnswer(int i) {
     if (questionAndAnswers.getAnswers().get(i).isCorrect()) {
       handleAnswer(true);
-    }else{
+    } else {
       handleAnswer(false);
     }
 
@@ -73,54 +68,26 @@ public abstract class QuestionsFragment extends Fragment {
   /**
    * Will load Uber app if installed, if not will open link to app store to install it.
    */
-  protected void callCab(){
+  protected void callCab() {
     //TODO check if phone has Uber installed, give other cab options
     Uri uber = Uri.parse("https://m.uber.com/ul/?client_id=<CLIENT_ID>");
     Intent intent = new Intent(Intent.ACTION_VIEW, uber);
     startActivity(intent);
-
-//    PackageManager manager = getContext().getPackageManager()
-
-
   }
 
   /**
    * Opens dialer with 911 dialed.
    */
-  protected void emergency(){
+  protected void emergency() {
     Intent intent = new Intent(Intent.ACTION_DIAL);
     intent.setData(Uri.parse("tel:911"));
     startActivity(intent);
   }
 
-
-  /**
-   * Reciever that locks screen when password is correctly entered.
-   */
-  public static class PhoneUnlockedReceiver extends BroadcastReceiver {
-
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-      KeyguardManager keyguardManager = (KeyguardManager)context.
-          getSystemService(Context.KEYGUARD_SERVICE);
-      if (keyguardManager.isKeyguardSecure()) {
-        long now = System.currentTimeMillis();
-
-        //Sets the duration of time that the screen will be locked.
-        if(now - MainActivity.getLastLockedTime()<10000){
-          devicePolicyManager.lockNow();
-        }
-
-      }
-
-    }
-  }
-
   /**
    * The interface Question loader loads the next question.
    */
-  interface QuestionLoader{
+  interface QuestionLoader {
 
     /**
      * Reload question loads the next question.
@@ -128,5 +95,23 @@ public abstract class QuestionsFragment extends Fragment {
     void reloadQuestion();
   }
 
+  /**
+   * Reciever that locks screen when password is correctly entered.
+   */
+  public static class PhoneUnlockedReceiver extends BroadcastReceiver {
 
+    @Override
+    public void onReceive(Context context, Intent intent) {
+      KeyguardManager keyguardManager = (KeyguardManager) context.
+          getSystemService(Context.KEYGUARD_SERVICE);
+      if (keyguardManager.isKeyguardSecure()) {
+        long now = System.currentTimeMillis();
+
+        //Sets the duration of time that the screen will be locked.
+        if (now - MainActivity.getLastLockedTime() < 10000) {
+          devicePolicyManager.lockNow();
+        }
+      }
+    }
+  }
 }

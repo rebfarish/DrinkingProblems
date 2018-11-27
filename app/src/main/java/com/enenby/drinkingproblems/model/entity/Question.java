@@ -25,22 +25,21 @@ public class Question {
    */
   public static final int TRUE_FALSE = 2;
 
-@ColumnInfo(name = "question_id")
-@PrimaryKey(autoGenerate = true)
-private long id;
+  @ColumnInfo(name = "question_id")
+  @PrimaryKey(autoGenerate = true)
+  private long id;
 
-private String text;
+  private String text;
 
-private boolean randomAnswer;
+  private boolean randomAnswer;
 
-private int type;
+  private int type;
 
   /**
    * Instantiates a new Question.
    */
   public Question() {
-
-}
+  }
 
   /**
    * Gets question id.

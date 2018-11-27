@@ -1,7 +1,6 @@
 package com.enenby.drinkingproblems.service;
 
 import android.app.Application;
-import com.facebook.stetho.Stetho;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -21,15 +20,14 @@ public class DrinkingApplication extends Application {
   public void onCreate() {
     super.onCreate();
     instance = this;
-    Stetho.initializeWithDefaults(this);
+//    Stetho.initializeWithDefaults(this);
 
     GoogleSignInOptions options = new GoogleSignInOptions.Builder(
         GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail()
         .requestId()
         .build();
-    client = GoogleSignIn.getClient(this,options);
-
+    client = GoogleSignIn.getClient(this, options);
   }
 
   /**
@@ -52,8 +50,6 @@ public class DrinkingApplication extends Application {
 
   /**
    * Sets Google Sign in client.
-   *
-   * @param client
    */
   public void setClient(GoogleSignInClient client) {
     this.client = client;

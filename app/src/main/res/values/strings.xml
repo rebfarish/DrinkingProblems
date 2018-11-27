@@ -5,7 +5,7 @@
   <string name="general_settings">General</string>
   <string name="uber">Uber</string>
   <string name="lyft">Lyft</string>
-  <string name="geo_taxi">Geo Located Taxi</string>
+  <string name="geo_taxi">Taxi near me</string>
   <string name="help">Help</string>
   <string name="sign_in_error">Unable to sign in. Please check your credentials and connection.</string>
   <string name="string_key" translatable="false">Incorrect Tally</string>
